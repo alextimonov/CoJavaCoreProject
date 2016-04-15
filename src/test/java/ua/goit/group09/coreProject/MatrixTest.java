@@ -140,9 +140,6 @@ public class MatrixTest {
         matrix1.multiply(matrix2);
     }
 
-    /*@Rule
-    public ExpectedException expectedException = ExpectedException.none();*/
-
     @Ignore
     @Test
     public void testMultiplyLessThanOneLine() {
