@@ -81,11 +81,10 @@ public class Matrix {
     }
 
     /**
-     * adds given matrix to this
+     * subtracts given matrix to this
      * @param deducted          given addend matrix
      * @return                  result of adding
      */
-
     public Matrix subtract(Matrix deducted) {
         checkIfMatrixValid(deducted);
         checkIfMatrixValidToAddOrSubtract(deducted);

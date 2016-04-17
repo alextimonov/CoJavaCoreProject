@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Class that creates menu for user's choice of math operation with matrices
  */
-public class MatrixCalculatorMenu {
+public class MatrixCalcMenu {
     public static final String HEAD_MENU = "Two-dimensional Matrix Calculator. Input your choice:";
     public static final String LINE_1 = "1: (+) Find the sum of two matrices";
     public static final String LINE_2 = "2: (-) Find the difference of two matrices";
@@ -16,7 +16,7 @@ public class MatrixCalculatorMenu {
 
     private List<String> menuLines = new ArrayList<>();
 
-    public MatrixCalculatorMenu() {
+    public MatrixCalcMenu() {
         menuLines.add(HEAD_MENU);
         menuLines.add(LINE_1);
         menuLines.add(LINE_2);

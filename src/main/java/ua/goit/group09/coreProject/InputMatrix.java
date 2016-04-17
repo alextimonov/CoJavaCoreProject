@@ -12,7 +12,11 @@ public class InputMatrix {
      * @return          number of lines
      */
     public static int inputNumberLines() {
-        return inputInt("Input matrix's number of lines:");
+        int lines = inputInt("Input matrix's integer number of lines that more than zero:");
+        while (lines < 1) {
+            lines = inputInt("Number of lines should be more than zero! Input one more time:");
+        }
+        return lines;
     }
 
     /**
@@ -20,7 +24,23 @@ public class InputMatrix {
      * @return          number of columns
      */
     public static int inputNumberColumns() {
-        return inputInt("Input matrix's number of columns:");
+        int columns = inputInt("Input matrix's integer number of columns that more than zero:");
+        while (columns < 1) {
+            columns = inputInt("Number of columns should be more than zero! Input one more time:");
+        }
+        return columns;
+    }
+
+    // provides input of array double[][]
+    public static double[][] inputArray(int lines, int columns) {
+        double[][] array = new double[lines][columns];
+        System.out.println("Input array: ");
+        for (int i = 0; i < lines; i++) {
+            for (int j = 0; j < columns; j++) {
+                array[i][j] = inputDouble("Input element array[" + i + "][" + j + "]: ");
+            }
+        }
+        return array;
     }
 
     // provides input of integer value
@@ -49,17 +69,5 @@ public class InputMatrix {
                 System.out.println("Wrong input! Please, input double value.");
             }
         }
-    }
-
-    // provides input of array double[][]
-    public static double[][] inputMatrix(int lines, int columns) {
-        double[][] array = new double[lines][columns];
-        System.out.println("Input array: ");
-        for (int i = 0; i < lines; i++) {
-            for (int j = 0; j < columns; j++) {
-                array[i][j] = inputDouble("Input element array[" + i + "][" + j + "]: ");
-            }
-        }
-        return array;
     }
 }
