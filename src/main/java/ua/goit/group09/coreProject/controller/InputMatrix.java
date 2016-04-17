@@ -1,4 +1,4 @@
-package ua.goit.group09.coreProject;
+package ua.goit.group09.coreProject.controller;
 
 import java.util.Scanner;
 
@@ -58,7 +58,7 @@ public class InputMatrix {
     }
 
     // provides input of double value
-    static double inputDouble(String message) {
+    public static double inputDouble(String message) {
         while(true) {
             try {
                 System.out.println(message);

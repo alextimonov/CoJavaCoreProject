@@ -1,4 +1,4 @@
-package ua.goit.group09.coreProject;
+package ua.goit.group09.coreProject.view;
 
 import java.util.ArrayList;
 import java.util.List;

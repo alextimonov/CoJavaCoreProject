@@ -1,4 +1,6 @@
-package ua.goit.group09.coreProject;
+package ua.goit.group09.coreProject.logic;
+
+import ua.goit.group09.coreProject.data.MatrixData;
 
 /**
  * Class with matrix operators

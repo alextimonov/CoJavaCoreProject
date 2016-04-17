@@ -1,21 +1,20 @@
-package ua.goit.group09.coreProject;
+package ua.goit.group09.coreProject.controller;
+
+import ua.goit.group09.coreProject.data.MatrixData;
+import ua.goit.group09.coreProject.logic.*;
+import ua.goit.group09.coreProject.view.ConsolePrinter;
+import ua.goit.group09.coreProject.view.MatrixCalcMenu;
+import ua.goit.group09.coreProject.view.OutputMatrix;
 
 import java.util.Scanner;
-
-enum MathOperation {
-    ADD_MATRICES,
-    SUBTRACT_MATRICES,
-    MULTIPLY_MATRICES,
-    MULTIPLY_NUMBER_AND_MATRIX
-}
 
 /**
  * Running class to provide user's interface to work with class Matrix
  */
 public class MatrixCalcRunner {
     private static MatrixCalc matrixCalc =
-            new MatrixCalcWithInvalidMatrices
-                    (new MatrixCalcWithImproperMatrices
+            new MatrixCalcValidator
+                    (new MatrixCalcProperMatricesValidator
                             (new MatrixCalcDefault()));
 
     public static void main(String[] args) {
@@ -29,7 +28,7 @@ public class MatrixCalcRunner {
         MatrixCalcMenu menu = new MatrixCalcMenu();
         while (isNeedToRun) {
             try {
-                PrintToConsole.printLineList(menu.getMenuLines());
+                ConsolePrinter.printLineList(menu.getMenuLines());
                 String s = sc.nextLine();
                 int usersChoice = Integer.parseInt(s);
                 switch (usersChoice) {
@@ -49,22 +48,22 @@ public class MatrixCalcRunner {
                     break;
 
                     default: {
-                        PrintToConsole.printLine("Wrong input! Please, repeat.");
+                        ConsolePrinter.printLine("Wrong input! Please, repeat.");
                     }
                 }
             }
             catch (NumberFormatException e) {
-                PrintToConsole.printLine("Input format Error!");
+                ConsolePrinter.printLine("Input format Error!");
             }
         }
         sc.close();
     }
 
     private static void makeMathOperation(MathOperation mathOperation) {
-        PrintToConsole.printLine("Chosen operation is " + mathOperation.toString());
+        ConsolePrinter.printLine("Chosen operation is " + mathOperation.toString());
         MatrixData matrix1 = inputMatrix(mathOperation);
-        PrintToConsole.printLine("Inputted matrix #1:");
-        PrintToConsole.printLineList(OutputMatrix.matrixToStringList(matrix1));
+        ConsolePrinter.printLine("Inputted matrix #1:");
+        ConsolePrinter.printLineList(OutputMatrix.matrixToStringList(matrix1));
 
         MatrixData matrix2 = null;
         double number = 0;
@@ -73,8 +72,8 @@ public class MatrixCalcRunner {
         }
         else {
             matrix2 = inputMatrix(mathOperation);
-            PrintToConsole.printLine("Inputted matrix #2:");
-            PrintToConsole.printLineList(OutputMatrix.matrixToStringList(matrix2));
+            ConsolePrinter.printLine("Inputted matrix #2:");
+            ConsolePrinter.printLineList(OutputMatrix.matrixToStringList(matrix2));
         }
         MatrixData result = null;
         try {
@@ -95,13 +94,13 @@ public class MatrixCalcRunner {
                     result = matrixCalc.multiply(number, matrix1);
                 }
             }
-            PrintToConsole.printLine("The result of " + mathOperation.toString() + " is:");
-            PrintToConsole.printLineList(OutputMatrix.matrixToStringList(result));
+            ConsolePrinter.printLine("The result of " + mathOperation.toString() + " is:");
+            ConsolePrinter.printLineList(OutputMatrix.matrixToStringList(result));
         }
         catch (Exception e) {
-            PrintToConsole.printLine(e.getMessage());
+            ConsolePrinter.printLine(e.getMessage());
         }
-        PrintToConsole.printLine("");
+        ConsolePrinter.printLine("");
     }
 
     private static MatrixData inputMatrix(MathOperation mathOperation) {

@@ -1,15 +1,17 @@
-package ua.goit.group09.coreProject;
+package ua.goit.group09.coreProject.logic;
+
+import ua.goit.group09.coreProject.data.MatrixData;
 
 /**
  * Created by Alex on 16.04.2016.
  */
-public class MatrixCalcWithImproperMatrices implements MatrixCalc {
+public class MatrixCalcProperMatricesValidator implements MatrixCalc {
 
     /* decorated object */
     private final MatrixCalc origin;
 
     // Constructor for decorator
-    public MatrixCalcWithImproperMatrices(MatrixCalc origin) {
+    public MatrixCalcProperMatricesValidator(MatrixCalc origin) {
         this.origin = origin;
     }
 

@@ -3,6 +3,11 @@ package ua.goit.group09.coreProject;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import ua.goit.group09.coreProject.data.MatrixData;
+import ua.goit.group09.coreProject.logic.MatrixCalc;
+import ua.goit.group09.coreProject.logic.MatrixCalcDefault;
+import ua.goit.group09.coreProject.logic.MatrixCalcProperMatricesValidator;
+import ua.goit.group09.coreProject.logic.MatrixCalcValidator;
 
 import static org.junit.Assert.*;
 
@@ -11,8 +16,8 @@ import static org.junit.Assert.*;
  */
 public class MatrixSubtractTest {
     MatrixCalc matrixCalc =
-            new MatrixCalcWithInvalidMatrices
-                    (new MatrixCalcWithImproperMatrices
+            new MatrixCalcValidator
+                    (new MatrixCalcProperMatricesValidator
                             (new MatrixCalcDefault()));
 
     @Test

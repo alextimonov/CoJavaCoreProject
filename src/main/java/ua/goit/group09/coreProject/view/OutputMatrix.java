@@ -1,4 +1,6 @@
-package ua.goit.group09.coreProject;
+package ua.goit.group09.coreProject.view;
+
+import ua.goit.group09.coreProject.data.MatrixData;
 
 import java.util.ArrayList;
 import java.util.List;

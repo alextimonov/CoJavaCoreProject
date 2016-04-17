@@ -1,15 +1,17 @@
-package ua.goit.group09.coreProject;
+package ua.goit.group09.coreProject.logic;
+
+import ua.goit.group09.coreProject.data.MatrixData;
 
 /**
  * Class - decorator for the class MatrixCalc, checks if given matrices are valid
  */
-public class MatrixCalcWithInvalidMatrices implements MatrixCalc {
+public class MatrixCalcValidator implements MatrixCalc {
 
     /* decorated object */
     private final MatrixCalc origin;
 
     // Constructor for decorator
-    MatrixCalcWithInvalidMatrices(MatrixCalc matrixCalc) {
+    public MatrixCalcValidator(MatrixCalc matrixCalc) {
         this.origin = matrixCalc;
     }
 
