@@ -1,33 +1,33 @@
 package ua.goit.group09.coreProject.logic;
 
-import ua.goit.group09.coreProject.data.MatrixData;
+import ua.goit.group09.coreProject.data.Matrix;
 
 /**
  * Created by Alex on 16.04.2016.
  */
-public class MatrixCalcProperMatricesValidator implements MatrixCalc {
+public class MatricesCanBeOperatedValidator implements MatrixCalc {
 
     /* decorated object */
     private final MatrixCalc origin;
 
     // Constructor for decorator
-    public MatrixCalcProperMatricesValidator(MatrixCalc origin) {
+    public MatricesCanBeOperatedValidator(MatrixCalc origin) {
         this.origin = origin;
     }
 
     /**
-     * Checks if given matrices can be added, than invokes method add from decorated class
+     * Checks if given matrices can be added, than invokes method sum from decorated class
      * @param addend1       addend matrix #1
      * @param addend2       addend matrix #2
      * @return              result of summation
      */
     @Override
-    public MatrixData add(MatrixData addend1, MatrixData addend2) {
+    public Matrix sum(Matrix addend1, Matrix addend2) {
         if (isImpossibleToAddSubtrat(addend1, addend2)) {
             throw new IllegalArgumentException
-                    ("Added matrices have different number of lines or columns to add!");
+                    ("Added matrices have different number of lines or columns to sum!");
         }
-        return this.origin.add(addend1, addend2);
+        return this.origin.sum(addend1, addend2);
     }
 
     /**
@@ -37,7 +37,7 @@ public class MatrixCalcProperMatricesValidator implements MatrixCalc {
      * @return              result of subtract
      */
     @Override
-    public MatrixData subtract(MatrixData minuend, MatrixData subtrahend) {
+    public Matrix subtract(Matrix minuend, Matrix subtrahend) {
         if (isImpossibleToAddSubtrat(minuend, subtrahend)) {
             throw new IllegalArgumentException
                     ("Added matrices have different number of lines or columns to subtract!");
@@ -52,7 +52,7 @@ public class MatrixCalcProperMatricesValidator implements MatrixCalc {
      * @return                  result of multiplication
      */
     @Override
-    public MatrixData multiply(MatrixData multiplier1, MatrixData multiplier2) {
+    public Matrix multiply(Matrix multiplier1, Matrix multiplier2) {
         if (isImpossibleToMultiply(multiplier1, multiplier2)) {
             throw new IllegalArgumentException
                     ("Second multiplied matrix has improper number of lines to multiply!");
@@ -67,18 +67,18 @@ public class MatrixCalcProperMatricesValidator implements MatrixCalc {
      * @return
      */
     @Override
-    public MatrixData multiply(double number, MatrixData multiplier) {
+    public Matrix multiply(double number, Matrix multiplier) {
         return this.origin.multiply(number, multiplier);
     }
 
     // checks if given matrix can be added or subtracted
-    private boolean isImpossibleToAddSubtrat(MatrixData matrixData1, MatrixData matrixData2) {
-        return matrixData1.getLines() != matrixData2.getLines() ||
-                matrixData1.getColumns() != matrixData2.getColumns();
+    private boolean isImpossibleToAddSubtrat(Matrix matrix1, Matrix matrix2) {
+        return matrix1.getLines() != matrix2.getLines() ||
+                matrix1.getColumns() != matrix2.getColumns();
     }
 
     // checks if it's possible to multiply two matrices
-    private boolean isImpossibleToMultiply(MatrixData multiplier1, MatrixData multiplier2) {
+    private boolean isImpossibleToMultiply(Matrix multiplier1, Matrix multiplier2) {
         return multiplier1.getColumns() != multiplier2.getLines();
     }
 }

@@ -1,32 +1,32 @@
 package ua.goit.group09.coreProject.logic;
 
-import ua.goit.group09.coreProject.data.MatrixData;
+import ua.goit.group09.coreProject.data.Matrix;
 
 /**
  * Class - decorator for the class MatrixCalc, checks if given matrices are valid
  */
-public class MatrixCalcValidator implements MatrixCalc {
+public class MatricesValidator implements MatrixCalc {
 
     /* decorated object */
     private final MatrixCalc origin;
 
     // Constructor for decorator
-    public MatrixCalcValidator(MatrixCalc matrixCalc) {
+    public MatricesValidator(MatrixCalc matrixCalc) {
         this.origin = matrixCalc;
     }
 
     /**
-     * Checks if given matrices with data are valid, than invokes method add from decorated class
+     * Checks if given matrices with data are valid, than invokes method sum from decorated class
      * @param addend1       addend matrix #1
      * @param addend2       addend matrix #2
      * @return              result of summation
      */
     @Override
-    public MatrixData add(MatrixData addend1, MatrixData addend2) {
+    public Matrix sum(Matrix addend1, Matrix addend2) {
         if (isNotValid(addend1) || isNotValid(addend2)) {
             throw new IllegalArgumentException("Matrix has less than one line or column!");
         }
-        return this.origin.add(addend1, addend2);
+        return this.origin.sum(addend1, addend2);
     }
 
     /**
@@ -36,7 +36,7 @@ public class MatrixCalcValidator implements MatrixCalc {
      * @return              result of subtract
      */
     @Override
-    public MatrixData subtract(MatrixData minuend, MatrixData subtrahend) {
+    public Matrix subtract(Matrix minuend, Matrix subtrahend) {
         if (isNotValid(minuend) || isNotValid(subtrahend)) {
             throw new IllegalArgumentException("Matrix has less than one line or column!");
         }
@@ -50,7 +50,7 @@ public class MatrixCalcValidator implements MatrixCalc {
      * @return                  result of multiplication
      */
     @Override
-    public MatrixData multiply(MatrixData multiplier1, MatrixData multiplier2) {
+    public Matrix multiply(Matrix multiplier1, Matrix multiplier2) {
         if (isNotValid(multiplier1) || isNotValid(multiplier2)) {
             throw new IllegalArgumentException("Matrix has less than one line or column!");
         }
@@ -64,14 +64,14 @@ public class MatrixCalcValidator implements MatrixCalc {
      * @return
      */
     @Override
-    public MatrixData multiply(double number, MatrixData multiplier) {
+    public Matrix multiply(double number, Matrix multiplier) {
         if (isNotValid(multiplier)) {
             throw new IllegalArgumentException("Matrix has less than one line or column!");
         }
         return this.origin.multiply(number, multiplier);
     }
 
-    private static boolean isNotValid(MatrixData matrixData) {
-        return matrixData.getLines() < 1 || matrixData.getColumns() < 1;
+    private static boolean isNotValid(Matrix matrix) {
+        return matrix.getLines() < 1 || matrix.getColumns() < 1;
     }
 }

@@ -1,11 +1,25 @@
 package ua.goit.group09.coreProject.controller;
 
+import ua.goit.group09.coreProject.data.Matrix;
+
 import java.util.Scanner;
 
 /**
  * Provides input of needed data for class Matrix
  */
 public class InputMatrix {
+
+    /**
+     * provides input of the matrix
+     * @return          matrix with inputted number of lines, columns and elements of array
+     */
+    public static Matrix inputMatrixData() {
+        Matrix matrix = new Matrix();
+        matrix.setLines(inputNumberLines());
+        matrix.setColumns(inputNumberColumns());
+        matrix.setArray(inputArray(matrix.getLines(), matrix.getColumns()));
+        return matrix;
+    }
 
     /**
      * provides input the matrix's lines number

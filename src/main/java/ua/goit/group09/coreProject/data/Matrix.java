@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * Class with matrix data
  */
-public class MatrixData {
+public class Matrix {
     /* number of lines in matrix */
     private int lines;
     /* number of columns in matrix */
@@ -14,18 +14,18 @@ public class MatrixData {
     private double[][] array;
 
     /* Default constructor */
-    public MatrixData() {
+    public Matrix() {
     }
 
     /* Constructor by numbers of lines & columns */
-    public MatrixData(int lines, int columns) {
+    public Matrix(int lines, int columns) {
         this();
         this.lines = lines;
         this.columns = columns;
     }
 
     /* Full constructor */
-    public MatrixData(int lines, int columns, double[][] array) {
+    public Matrix(int lines, int columns, double[][] array) {
         this.lines = lines;
         this.columns = columns;
         this.array = array;
@@ -62,7 +62,7 @@ public class MatrixData {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        MatrixData that = (MatrixData) obj;
+        Matrix that = (Matrix) obj;
 
         if (lines != that.lines) return false;
         if (columns != that.columns) return false;

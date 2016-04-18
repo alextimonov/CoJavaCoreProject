@@ -1,12 +1,12 @@
 package ua.goit.group09.coreProject.view;
 
-import ua.goit.group09.coreProject.data.MatrixData;
+import ua.goit.group09.coreProject.data.Matrix;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class for matrixToStringList data from class Matrix
+ * Class for output data from class Matrix
  */
 
 public class OutputMatrix {
@@ -18,7 +18,7 @@ public class OutputMatrix {
      * @param matrix        given Matrix
      * @return              List of strings
      */
-    public static List<String> matrixToStringList(MatrixData matrix) {
+    public static List<String> matrixToStringList(Matrix matrix) {
         List<String> result = new ArrayList<>();
         result.add(outputNLinesColumns(matrix.getLines(), matrix.getColumns()));
         for (int i = 0; i < matrix.getLines(); i++) {

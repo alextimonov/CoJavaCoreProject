@@ -11,10 +11,10 @@ public class MatrixCalcMenu {
     public static final String LINE_1 = "1: (+) Find the sum of two matrices";
     public static final String LINE_2 = "2: (-) Find the difference of two matrices";
     public static final String LINE_3 = "3: (*) Find the multiplication of two matrices";
-    public static final String LINE_4 = "4: ( ) Find the multiplication of number and matrix";
+    public static final String LINE_4 = "4: (*) Find the multiplication of number and matrix";
     public static final String LINE_5 = "5: Exit";
 
-    private List<String> menuLines = new ArrayList<>();
+    private static List<String> menuLines = new ArrayList<>();
 
     public MatrixCalcMenu() {
         menuLines.add(HEAD_MENU);
@@ -25,7 +25,7 @@ public class MatrixCalcMenu {
         menuLines.add(LINE_5);
     }
 
-    public List<String> getMenuLines() {
+    public static List<String> getMenuLines() {
         return menuLines;
     }
 }
