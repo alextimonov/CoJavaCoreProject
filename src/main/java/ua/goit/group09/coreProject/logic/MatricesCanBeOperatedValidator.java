@@ -1,9 +1,11 @@
 package ua.goit.group09.coreProject.logic;
 
 import ua.goit.group09.coreProject.data.Matrix;
+import ua.goit.group09.coreProject.exceptions.*;
 
 /**
- * Created by Alex on 16.04.2016.
+ * Class-decorator for the class MatrixCalc, checks if given matrices can be operated
+ * in depending on given type of math operation
  */
 public class MatricesCanBeOperatedValidator implements MatrixCalc {
 
@@ -30,14 +32,14 @@ public class MatricesCanBeOperatedValidator implements MatrixCalc {
             case SUM_MATRICES:
             case SUBTRACT_MATRICES: {
                 if (isImpossibleToAddSubtrat(matrix1, matrix2)) {
-                    throw new IllegalArgumentException
-                            ("Added matrices have different number of lines or columns to sum!");
+                    throw new CantBeAddedSubtractedException
+                            ("Matrices have different number of lines or columns to sum or subtract!");
                 }
             }
             break;
             case MULTIPLY_MATRICES: {
                 if (isImpossibleToMultiply(matrix1, matrix2)) {
-                    throw new IllegalArgumentException
+                    throw new CantBeMultipliedException
                             ("Second multiplied matrix has improper number of lines to multiply!");
                 }
             }

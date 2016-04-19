@@ -1,6 +1,7 @@
 package ua.goit.group09.coreProject.logic;
 
 import ua.goit.group09.coreProject.data.Matrix;
+import ua.goit.group09.coreProject.exceptions.*;
 
 /**
  * Class-decorator for the class MatrixCalc, checks if given matrices are valid
@@ -34,13 +35,13 @@ public class MatricesValidator implements MatrixCalc {
 
     private void check(Matrix matrix) {
         if (matrix == null) {
-            throw new IllegalArgumentException("Matrix object points to null!");
+            throw new MatrixNullPointerException("Matrix object points to null!");
         }
         if (isNotValid(matrix)) {
-            throw new IllegalArgumentException("Matrix has less than one line or column!");
+            throw new LessThanOneLineColumnException("Matrix has less than one line or column!");
         }
         if (hasDifferentNLinesOrColumns(matrix)) {
-            throw new IllegalArgumentException("Matrix has different number of lines (columns) in field and array!");
+            throw new WrongNLinesColumnsException("Matrix has different number of lines (columns) in field and array!");
         }
 
     }

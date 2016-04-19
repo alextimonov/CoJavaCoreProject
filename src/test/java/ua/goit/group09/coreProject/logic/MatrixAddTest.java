@@ -4,6 +4,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import ua.goit.group09.coreProject.data.Matrix;
+import ua.goit.group09.coreProject.exceptions.*;
 
 import static org.junit.Assert.*;
 
@@ -153,8 +154,7 @@ public class MatrixAddTest {
         double[][] arr2 = {{5, 6}, {2, 3}};
         matrix2.setArray(arr2);
 
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("different number of lines or columns");
+        expectedException.expect(CantBeAddedSubtractedException.class);
         matrixCalc.makeOperation(sum, matrix1, matrix2, 0);
     }
 
@@ -168,8 +168,7 @@ public class MatrixAddTest {
         double[][] arr2 = {{5}, {2}, {3}};
         matrix2.setArray(arr2);
 
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("different number of lines or columns");
+        expectedException.expect(CantBeAddedSubtractedException.class);
         matrixCalc.makeOperation(sum, matrix1, matrix2, 0);
     }
 
@@ -181,8 +180,7 @@ public class MatrixAddTest {
         double[][] arr2 = {{5, 6}, {3, 7}};
         matrix2.setArray(arr2);
 
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("less than one line or column");
+        expectedException.expect(LessThanOneLineColumnException.class);
         matrixCalc.makeOperation(sum, matrix1, matrix2, 0);
     }
 
@@ -194,8 +192,7 @@ public class MatrixAddTest {
 
         Matrix matrix2 = new Matrix(2, 0);
 
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("less than one line or column");
+        expectedException.expect(LessThanOneLineColumnException.class);
         matrixCalc.makeOperation(sum, matrix1, matrix2, 0);
     }
 
@@ -209,8 +206,7 @@ public class MatrixAddTest {
         double[][] arr2 = {{5, 6}, {3, 7}};
         matrix2.setArray(arr2);
 
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("different number of lines (columns)");
+        expectedException.expect(WrongNLinesColumnsException.class);
         matrixCalc.makeOperation(sum, matrix1, matrix2, 0);
     }
 }

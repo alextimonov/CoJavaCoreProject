@@ -4,6 +4,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import ua.goit.group09.coreProject.data.Matrix;
+import ua.goit.group09.coreProject.exceptions.*;
 
 import static org.junit.Assert.*;
 
@@ -153,8 +154,7 @@ public class MatrixMultiplyTest {
         double[][] arr2 = {{5, 6, 7}};
         matrix2.setArray(arr2);
 
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("improper number of lines");
+        expectedException.expect(CantBeMultipliedException.class);
         matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
     }
 
@@ -168,8 +168,7 @@ public class MatrixMultiplyTest {
         double[][] arr2 = {{5, 6}, {2, 3}, {1, 2}};
         matrix2.setArray(arr2);
 
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("improper number of lines");
+        expectedException.expect(CantBeMultipliedException.class);
         matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
     }
 
@@ -181,8 +180,7 @@ public class MatrixMultiplyTest {
         double[][] arr2 = {{5, 6}, {3, 7}};
         matrix2.setArray(arr2);
 
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("less than one");
+        expectedException.expect(LessThanOneLineColumnException.class);
         matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
     }
 
@@ -196,8 +194,7 @@ public class MatrixMultiplyTest {
         double[][] arr2 = {{5, 6}, {3, 7}};
         matrix2.setArray(arr2);
 
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("less than one");
+        expectedException.expect(LessThanOneLineColumnException.class);
         matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
     }
 
@@ -211,8 +208,7 @@ public class MatrixMultiplyTest {
         double[][] arr2 = {{5, 6}, {3, 7}};
         matrix2.setArray(arr2);
 
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("different number of lines (columns)");
+        expectedException.expect(WrongNLinesColumnsException.class);
         matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
     }
 }

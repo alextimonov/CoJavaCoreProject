@@ -4,6 +4,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import ua.goit.group09.coreProject.data.Matrix;
+import ua.goit.group09.coreProject.exceptions.*;
 
 import static org.junit.Assert.*;
 
@@ -119,8 +120,7 @@ public class MatrixNumberMultiplyTest {
 
         double number = -5.0;
 
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("less than one");
+        expectedException.expect(LessThanOneLineColumnException.class);
         matrixCalc.makeOperation(multiplyNumber, matrix, null, number);
     }
 
@@ -132,8 +132,7 @@ public class MatrixNumberMultiplyTest {
 
         double number = -5.0;
 
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("less than one");
+        expectedException.expect(LessThanOneLineColumnException.class);
         matrixCalc.makeOperation(multiplyNumber, matrix, null, number);
     }
 
@@ -145,8 +144,7 @@ public class MatrixNumberMultiplyTest {
 
         double number = -5.0;
 
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("different number of lines (columns)");
+        expectedException.expect(WrongNLinesColumnsException.class);
         matrixCalc.makeOperation(multiplyNumber, matrix, null, number);
     }
 }
