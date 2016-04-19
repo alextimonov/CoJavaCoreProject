@@ -27,7 +27,7 @@ public class MatrixMultiplyTest {
         Matrix matrix2 = new Matrix(arr2);
 
         Matrix expected = matrix1;
-        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
+        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -42,7 +42,7 @@ public class MatrixMultiplyTest {
         double[][] arr = {{6, 6}, {16, 14}};
         Matrix expected = new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
+        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -57,7 +57,7 @@ public class MatrixMultiplyTest {
         double[][] arr = {{6, 7, 8, 9}, {16, 17, 18, 19}, {26, 27, 28, 29}};
         Matrix expected = new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
+        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -72,7 +72,7 @@ public class MatrixMultiplyTest {
         double[][] arr = {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}};
         Matrix expected = new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
+        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -87,7 +87,7 @@ public class MatrixMultiplyTest {
         double[][] arr = {{5.8125, -9.75}, {25.71875, -33.8425}};
         Matrix expected = new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
+        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -102,7 +102,7 @@ public class MatrixMultiplyTest {
         double[][] arr = {{0, 0}, {0, 0}, {0, 0}};
         Matrix expected = new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
+        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -117,7 +117,7 @@ public class MatrixMultiplyTest {
         double[][] arr = {{35}};
         Matrix expected = new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
+        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -132,8 +132,8 @@ public class MatrixMultiplyTest {
         double[][] arr2 = {{5, 6, 7}};
         Matrix matrix2 = new Matrix(arr2);
 
-        expectedException.expect(CantBeMultipliedException.class);
-        matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
+        expectedException.expect(MultiplyImpossibleException.class);
+        matrixCalc.makeOperation(multiply, matrix1, matrix2);
     }
 
     @Test
@@ -144,47 +144,30 @@ public class MatrixMultiplyTest {
         double[][] arr2 = {{5, 6}, {2, 3}, {1, 2}};
         Matrix matrix2 = new Matrix(arr2);
 
-        expectedException.expect(CantBeMultipliedException.class);
-        matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
-    }
-
-    /*@Test
-    public void testMultiplyLessThanOneLine() {
-        Matrix matrix1 = new Matrix(-2, 2);
-
-        Matrix matrix2 = new Matrix(2, 2);
-        double[][] arr2 = {{5, 6}, {3, 7}};
-        matrix2.setArray(arr2);
-
-        expectedException.expect(LessThanOneLineColumnException.class);
-        matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
+        expectedException.expect(MultiplyImpossibleException.class);
+        matrixCalc.makeOperation(multiply, matrix1, matrix2);
     }
 
     @Test
-    public void testMultiplyLessThanOneColumn() {
-        Matrix matrix1 = new Matrix(3, 2);
+    public void testMultiplyNullMatrix_1() {
+        Matrix matrix1 = null;
+
+        double[][] arr2 = {{5, 2}, {2, 3}, {3, -2}};
+        Matrix matrix2 = new Matrix(arr2);
+
+        expectedException.expect(MatrixNullPointerException.class);
+        matrixCalc.makeOperation(multiply, matrix1, matrix2);
+    }
+
+    @Test
+    public void testMultiplyNullMatrix_2() {
         double[][] arr1 = {{1, 2}, {3, 4}, {5, 6}};
-        matrix1.setArray(arr1);
+        Matrix matrix1 = new Matrix(arr1);
 
-        Matrix matrix2 = new Matrix(2, 0);
-        double[][] arr2 = {{5, 6}, {3, 7}};
-        matrix2.setArray(arr2);
+        Matrix matrix2 = null;
 
-        expectedException.expect(LessThanOneLineColumnException.class);
-        matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
+        expectedException.expect(MatrixNullPointerException.class);
+        matrixCalc.makeOperation(multiply, matrix1, matrix2);
     }
 
-    @Test
-    public void testMultiplyWrongNLines() {
-        Matrix matrix1 = new Matrix(3, 2);
-        double[][] arr1 = {{3, -1}, {-4, 7}, {1, 2}};
-        matrix1.setArray(arr1);
-
-        Matrix matrix2 = new Matrix(3, 2);
-        double[][] arr2 = {{5, 6}, {3, 7}};
-        matrix2.setArray(arr2);
-
-        expectedException.expect(WrongNLinesColumnsException.class);
-        matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
-    }*/
 }

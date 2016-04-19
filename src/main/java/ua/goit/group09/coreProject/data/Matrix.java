@@ -3,31 +3,37 @@ package ua.goit.group09.coreProject.data;
 import java.util.Arrays;
 
 /**
- * Class with matrix data
+ * Class with matrix immutable data
  */
-public class Matrix {
+public final class Matrix {
     /* permissible error of the comparison */
-    public static final double DELTA = 10E-9;
-    /* 2-dimension array with matrix elements */
+    private static final double DELTA = 10E-9;
+
+    /* Two-dimension array with matrix elements */
     private final double[][] array;
 
     /* Constructor with given array */
     public Matrix(double[][] array) {
-        this.array = array;
+        this.array = array.clone();
     }
 
-    /* ================ Getters & Setters =================== */
-
-    public int getLines() {
-        return array.length;
+    /* Constructor for defencive copy */
+    public Matrix(Matrix matrix) {
+        this.array = matrix.array;
     }
 
-        public int getColumns() {
-        return array[0].length;
-    }
+    /* ================ Getters =================== */
 
     public double[][] getArray() {
-        return array;
+        return new MatrixContainer(this).getMatrix().array;
+    }
+
+    public int getLines() {
+        return getArray().length;
+    }
+
+    public int getColumns() {
+        return getArray()[0].length;
     }
 
     @Override

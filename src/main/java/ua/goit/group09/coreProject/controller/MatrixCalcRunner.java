@@ -90,7 +90,7 @@ public class MatrixCalcRunner {
         }
 
         try {
-            Matrix result = matrixCalc.makeOperation(mathOperation, matrix1, matrix2, number);
+            Matrix result = matrixCalc.makeOperation(mathOperation, matrix1, matrix2);
             ConsolePrinter.printLine("The result of " + mathOperation.toString() + " is:");
             ConsolePrinter.printLineList(OutputMatrix.matrixToStringList(result));
         }

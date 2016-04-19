@@ -12,11 +12,10 @@ public class MatrixCalcDefault implements MatrixCalc {
      * @param mathOperation     type of math operation (sum, subtract, multiply)
      * @param matrix1           first matrix to be operated
      * @param matrix2           second matrix to be operated (if it's needed to given type of math operation)
-     * @param number            number to be operated (if it's needed to given type of math operation)
      * @return                  result of given operation
      */
     @Override
-    public Matrix makeOperation(MathOperation mathOperation, Matrix matrix1, Matrix matrix2, double number) {
+    public Matrix makeOperation(MathOperation mathOperation, Matrix matrix1, Matrix matrix2) {
         Matrix result = null;
         switch (mathOperation) {
             case SUM_MATRICES: {
@@ -32,7 +31,7 @@ public class MatrixCalcDefault implements MatrixCalc {
             }
             break;
             case MULTIPLY_NUMBER_AND_MATRIX: {
-                result = multiply(number, matrix1);
+                result = multiply(matrix1, mathOperation.getDoubleMultiplier());
             }
         }
         return result;
@@ -92,14 +91,14 @@ public class MatrixCalcDefault implements MatrixCalc {
     /**
      * finds the multiplication of double number and matrix
      * @param number
-     * @param multiplier
+     * @param matrix
      * @return
      */
-    public Matrix multiply(double number, Matrix multiplier) {
-        double[][] resultArray = new double[multiplier.getLines()][multiplier.getColumns()];
-        for (int i = 0; i < multiplier.getLines(); i++) {
-            for (int j = 0; j < multiplier.getColumns(); j++) {
-                resultArray[i][j] = number * multiplier.getArray()[i][j];
+    public Matrix multiply(Matrix matrix, double number) {
+        double[][] resultArray = new double[matrix.getLines()][matrix.getColumns()];
+        for (int i = 0; i < matrix.getLines(); i++) {
+            for (int j = 0; j < matrix.getColumns(); j++) {
+                resultArray[i][j] = number * matrix.getArray()[i][j];
             }
         }
         return new Matrix(resultArray);

@@ -27,7 +27,7 @@ public class MatrixSubtractTest {
         Matrix matrix2 = new Matrix(arr2);
 
         Matrix expected = matrix1;
-        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
+        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -42,7 +42,7 @@ public class MatrixSubtractTest {
         double[][] arr = {{1, 2}, {3, 4}};
         Matrix expected = new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
+        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -57,7 +57,7 @@ public class MatrixSubtractTest {
         double[][] arr = {{1, 2}, {3, 4}, {5, 6}};
         Matrix expected = new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
+        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -72,7 +72,7 @@ public class MatrixSubtractTest {
         double[][] arr = {{7, 5, 12}};
         Matrix expected = new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
+        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -87,7 +87,7 @@ public class MatrixSubtractTest {
         double[][] arr = {{-5.7, 6.5, -4.25}, {12.5, -3.375, 8.4}};
         Matrix expected = new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
+        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -102,7 +102,7 @@ public class MatrixSubtractTest {
         double[][] arr = {{0, 0}, {0, 0}};
         Matrix expected = new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
+        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -117,7 +117,7 @@ public class MatrixSubtractTest {
         double[][] arr = {{5}};
         Matrix expected = new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
+        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -132,8 +132,8 @@ public class MatrixSubtractTest {
         double[][] arr2 = {{5, 6}, {2, 3}};
         Matrix matrix2 = new Matrix(arr2);
 
-        expectedException.expect(CantBeAddedSubtractedException.class);
-        matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
+        expectedException.expect(AddSubtractImpossibleException.class);
+        matrixCalc.makeOperation(subtract, matrix1, matrix2);
     }
 
     @Test
@@ -144,45 +144,29 @@ public class MatrixSubtractTest {
         double[][] arr2 = {{5}, {2}, {3}};
         Matrix matrix2 = new Matrix(arr2);
 
-        expectedException.expect(CantBeAddedSubtractedException.class);
-        matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
-    }
-
-    /*@Test
-    public void testSubtractLessThanOneLine() {
-        Matrix matrix1 = new Matrix(-1, 2);
-
-        Matrix matrix2 = new Matrix(2, 2);
-        double[][] arr2 = {{5, 6}, {3, 7}};
-        matrix2.setArray(arr2);
-
-        expectedException.expect(LessThanOneLineColumnException.class);
-        matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
+        expectedException.expect(AddSubtractImpossibleException.class);
+        matrixCalc.makeOperation(subtract, matrix1, matrix2);
     }
 
     @Test
-    public void testSubtractLessThanOneColumn() {
-        Matrix matrix1 = new Matrix(2, 2);
-        double[][] arr1 = {{5, 6}, {3, 7}};
-        matrix1.setArray(arr1);
+    public void testSubtructNullMatrix_1() {
+        Matrix matrix1 = null;
 
-        Matrix matrix2 = new Matrix(2, 0);
+        double[][] arr2 = {{5, 2}, {2, 3}, {3, -2}};
+        Matrix matrix2 = new Matrix(arr2);
 
-        expectedException.expect(LessThanOneLineColumnException.class);
-        matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
+        expectedException.expect(MatrixNullPointerException.class);
+        matrixCalc.makeOperation(subtract, matrix1, matrix2);
     }
 
     @Test
-    public void testSubtractWrongNColumns() {
-        Matrix matrix1 = new Matrix(2, 2);
-        double[][] arr1 = {{3, -1, 3}, {-4, 7, -2}};
-        matrix1.setArray(arr1);
+    public void testSubtructNullMatrix_2() {
+        double[][] arr1 = {{1, 2}, {3, 4}, {5, 6}};
+        Matrix matrix1 = new Matrix(arr1);
 
-        Matrix matrix2 = new Matrix(2, 2);
-        double[][] arr2 = {{5, 6}, {3, 7}};
-        matrix2.setArray(arr2);
+        Matrix matrix2 = null;
 
-        expectedException.expect(WrongNLinesColumnsException.class);
-        matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
-    }*/
+        expectedException.expect(MatrixNullPointerException.class);
+        matrixCalc.makeOperation(subtract, matrix1, matrix2);
+    }
 }

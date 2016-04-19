@@ -11,8 +11,7 @@ public interface MatrixCalc {
      * @param mathOperation     type of math operation (sum, subtract, multiply)
      * @param matrix1           first matrix to be operated
      * @param matrix2           second matrix to be operated (if it's needed to given type of math operation)
-     * @param number            number to be operated (if it's needed to given type of math operation)
      * @return                  result of given operation
      */
-    Matrix makeOperation(MathOperation mathOperation, Matrix matrix1, Matrix matrix2, double number);
+    Matrix makeOperation(MathOperation mathOperation, Matrix matrix1, Matrix matrix2);
 }

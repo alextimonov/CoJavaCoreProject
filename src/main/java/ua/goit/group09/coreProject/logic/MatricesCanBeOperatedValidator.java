@@ -23,29 +23,28 @@ public class MatricesCanBeOperatedValidator implements MatrixCalc {
      * @param mathOperation     type of math operation (sum, subtract, multiply)
      * @param matrix1           first matrix to be operated
      * @param matrix2           second matrix to be operated (if it's needed to given type of math operation)
-     * @param number            number to be operated (if it's needed to given type of math operation)
      * @return                  result of given operation
      */
     @Override
-    public Matrix makeOperation(MathOperation mathOperation, Matrix matrix1, Matrix matrix2, double number) {
+    public Matrix makeOperation(MathOperation mathOperation, Matrix matrix1, Matrix matrix2) {
         switch (mathOperation) {
             case SUM_MATRICES:
             case SUBTRACT_MATRICES: {
                 if (isImpossibleToAddSubtrat(matrix1, matrix2)) {
-                    throw new CantBeAddedSubtractedException
+                    throw new AddSubtractImpossibleException
                             ("Matrices have different number of lines or columns to sum or subtract!");
                 }
             }
             break;
             case MULTIPLY_MATRICES: {
                 if (isImpossibleToMultiply(matrix1, matrix2)) {
-                    throw new CantBeMultipliedException
+                    throw new MultiplyImpossibleException
                             ("Second multiplied matrix has improper number of lines to multiply!");
                 }
             }
             break;
         }
-        return this.origin.makeOperation(mathOperation, matrix1, matrix2, number);
+        return this.origin.makeOperation(mathOperation, matrix1, matrix2);
     }
 
    // checks if given matrix can be added or subtracted

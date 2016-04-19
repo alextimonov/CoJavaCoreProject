@@ -22,27 +22,26 @@ public class MatricesValidator implements MatrixCalc {
      * @param mathOperation     type of math operation (sum, subtract, multiply)
      * @param matrix1           first matrix to be operated
      * @param matrix2           second matrix to be operated (if it's needed to given type of math operation)
-     * @param number            number to be operated (if it's needed to given type of math operation)
      * @return                  result of given operation
      */
     @Override
-    public Matrix makeOperation(MathOperation mathOperation, Matrix matrix1, Matrix matrix2, double number) {
+    public Matrix makeOperation(MathOperation mathOperation, Matrix matrix1, Matrix matrix2) {
         makeValidation(matrix1);
         if (isNeedToCheckSecondMatrix(mathOperation))
             makeValidation(matrix2);
-        return this.origin.makeOperation(mathOperation, matrix1, matrix2, number);
+        return this.origin.makeOperation(mathOperation, matrix1, matrix2);
     }
 
     private void makeValidation(Matrix matrix) {
         if (matrix == null) {
             throw new MatrixNullPointerException("Matrix object points to null!");
         }
-        if (isNotValid(matrix)) {
+        /*if (isNotValid(matrix)) {
             throw new LessThanOneLineColumnException("Matrix has less than one line or column!");
         }
         if (hasDifferentNLinesOrColumns(matrix)) {
             throw new WrongNLinesColumnsException("Matrix has different number of lines (columns) in field and array!");
-        }
+        }*/
     }
 
     // checks if operation will be done with two matrices and it's necessary to makeValidation second matrix
@@ -50,13 +49,13 @@ public class MatricesValidator implements MatrixCalc {
         return mathOperation != MathOperation.MULTIPLY_NUMBER_AND_MATRIX;
     }
 
-    // checks if given matrix has less than one line or column
+    /*// checks if given matrix has less than one line or column
     private static boolean isNotValid(Matrix matrix) {
         return matrix.getLines() < 1 || matrix.getColumns() < 1;
-    }
+    }*/
 
-    // checks if given matrix has different number of lines (columns) in field lines(columns) and array
+    /*// checks if given matrix has different number of lines (columns) in field lines(columns) and array
     private static boolean hasDifferentNLinesOrColumns(Matrix matrix) {
         return matrix.getLines() != matrix.getArray().length || matrix.getColumns() != matrix.getArray()[0].length;
-    }
+    }*/
 }
