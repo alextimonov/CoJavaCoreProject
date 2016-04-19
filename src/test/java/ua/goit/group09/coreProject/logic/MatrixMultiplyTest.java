@@ -1,13 +1,9 @@
-package ua.goit.group09.coreProject;
+package ua.goit.group09.coreProject.logic;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import ua.goit.group09.coreProject.data.Matrix;
-import ua.goit.group09.coreProject.logic.MatrixCalc;
-import ua.goit.group09.coreProject.logic.MatrixCalcDefault;
-import ua.goit.group09.coreProject.logic.MatricesCanBeOperatedValidator;
-import ua.goit.group09.coreProject.logic.MatricesValidator;
 
 import static org.junit.Assert.*;
 
@@ -15,10 +11,11 @@ import static org.junit.Assert.*;
  * Testing class for mrethod multiply of class MatrixCalcDefault
  */
 public class MatrixMultiplyTest {
-    MatrixCalc matrixCalc =
-            new MatricesCanBeOperatedValidator
-                    (new MatricesValidator
-                            (new MatrixCalcDefault()));
+    private static MatrixCalc matrixCalc =
+            (new MatricesValidator
+                    (new MatricesCanBeOperatedValidator
+                            (new MatrixCalcDefault())));
+    MathOperation multiply = MathOperation.MULTIPLY_MATRICES;
 
     @Test
     public void testMultiplyNormal_1() {
@@ -31,7 +28,7 @@ public class MatrixMultiplyTest {
         matrix2.setArray(arr2);
 
         Matrix expected = matrix1;
-        Matrix actual = matrixCalc.multiply(matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
         assertEquals(expected, actual);
     }
 
@@ -49,7 +46,7 @@ public class MatrixMultiplyTest {
         double[][] arr = {{6, 6}, {16, 14}};
         expected.setArray(arr);
 
-        Matrix actual = matrixCalc.multiply(matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
         assertEquals(expected, actual);
     }
 
@@ -67,7 +64,7 @@ public class MatrixMultiplyTest {
         double[][] arr = {{6, 7, 8, 9}, {16, 17, 18, 19}, {26, 27, 28, 29}};
         expected.setArray(arr);
 
-        Matrix actual = matrixCalc.multiply(matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
         assertEquals(expected, actual);
     }
 
@@ -85,7 +82,25 @@ public class MatrixMultiplyTest {
         double[][] arr = {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}};
         expected.setArray(arr);
 
-        Matrix actual = matrixCalc.multiply(matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testMultiplyNormal_5() {
+        Matrix matrix1 = new Matrix(2, 3);
+        double[][] arr1 = {{-2.5, 3.25, 0}, {7.0, -1.125, 3.6}};
+        matrix1.setArray(arr1);
+
+        Matrix matrix2 = new Matrix(3, 2);
+        double[][] arr2 = {{3.2, -3.25}, {4.25, -5.5}, {2.25, -4.8}};
+        matrix2.setArray(arr2);
+
+        Matrix expected =  new Matrix(2, 2);
+        double[][] arr = {{5.8125, -9.75}, {25.71875, -33.8425}};
+        expected.setArray(arr);
+
+        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
         assertEquals(expected, actual);
     }
 
@@ -103,7 +118,7 @@ public class MatrixMultiplyTest {
         double[][] arr = {{0, 0}, {0, 0}, {0, 0}};
         expected.setArray(arr);
 
-        Matrix actual = matrixCalc.multiply(matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
         assertEquals(expected, actual);
     }
 
@@ -121,7 +136,7 @@ public class MatrixMultiplyTest {
         double[][] arr = {{35}};
         expected.setArray(arr);
 
-        Matrix actual = matrixCalc.multiply(matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
         assertEquals(expected, actual);
     }
 
@@ -140,7 +155,7 @@ public class MatrixMultiplyTest {
 
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("improper number of lines");
-        matrixCalc.multiply(matrix1, matrix2);
+        matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
     }
 
     @Test
@@ -155,7 +170,7 @@ public class MatrixMultiplyTest {
 
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("improper number of lines");
-        matrixCalc.multiply(matrix1, matrix2);
+        matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
     }
 
     @Test
@@ -168,13 +183,13 @@ public class MatrixMultiplyTest {
 
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("less than one");
-        matrixCalc.multiply(matrix1, matrix2);
+        matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
     }
 
     @Test
     public void testMultiplyLessThanOneColumn() {
         Matrix matrix1 = new Matrix(3, 2);
-        double[][] arr1 = {{1, 2}, {3, 4}};
+        double[][] arr1 = {{1, 2}, {3, 4}, {5, 6}};
         matrix1.setArray(arr1);
 
         Matrix matrix2 = new Matrix(2, 0);
@@ -183,6 +198,21 @@ public class MatrixMultiplyTest {
 
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("less than one");
-        matrixCalc.multiply(matrix1, matrix2);
+        matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
+    }
+
+    @Test
+    public void testMultiplyWrongNLines() {
+        Matrix matrix1 = new Matrix(3, 2);
+        double[][] arr1 = {{3, -1}, {-4, 7}, {1, 2}};
+        matrix1.setArray(arr1);
+
+        Matrix matrix2 = new Matrix(3, 2);
+        double[][] arr2 = {{5, 6}, {3, 7}};
+        matrix2.setArray(arr2);
+
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage("different number of lines (columns)");
+        matrixCalc.makeOperation(multiply, matrix1, matrix2, 0);
     }
 }

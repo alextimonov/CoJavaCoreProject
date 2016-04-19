@@ -1,13 +1,9 @@
-package ua.goit.group09.coreProject;
+package ua.goit.group09.coreProject.logic;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import ua.goit.group09.coreProject.data.Matrix;
-import ua.goit.group09.coreProject.logic.MatrixCalc;
-import ua.goit.group09.coreProject.logic.MatrixCalcDefault;
-import ua.goit.group09.coreProject.logic.MatricesCanBeOperatedValidator;
-import ua.goit.group09.coreProject.logic.MatricesValidator;
 
 import static org.junit.Assert.*;
 
@@ -15,11 +11,11 @@ import static org.junit.Assert.*;
  * Testing class for method multiply of class MatrixCalcDefault
  */
 public class MatrixAddTest {
-    MatrixCalc matrixCalc =
-            new MatricesValidator
-                 (new MatricesCanBeOperatedValidator
-                       (new MatrixCalcDefault()));
-
+    private static MatrixCalc matrixCalc =
+            (new MatricesValidator
+                    (new MatricesCanBeOperatedValidator
+                            (new MatrixCalcDefault())));
+    MathOperation sum = MathOperation.SUM_MATRICES;
 
     @Test
     public void testAddNormal_1() {
@@ -32,7 +28,7 @@ public class MatrixAddTest {
         matrix2.setArray(arr2);
 
         Matrix expected = matrix1;
-        Matrix actual = matrixCalc.sum(matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(sum, matrix1, matrix2, 0);
         assertEquals(expected, actual);
     }
 
@@ -50,7 +46,7 @@ public class MatrixAddTest {
         double[][] arr = {{6, 8}, {10, 12}};
         expected.setArray(arr);
 
-        Matrix actual = matrixCalc.sum(matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(sum, matrix1, matrix2, 0);
         assertEquals(expected, actual);
     }
 
@@ -68,7 +64,7 @@ public class MatrixAddTest {
         double[][] arr = {{8, 8}, {8, 8}, {8, 8}};
         expected.setArray(arr);
 
-        Matrix actual = matrixCalc.sum(matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(sum, matrix1, matrix2, 0);
         assertEquals(expected, actual);
     }
 
@@ -86,7 +82,25 @@ public class MatrixAddTest {
         double[][] arr = {{10, 20, 30}};
         expected.setArray(arr);
 
-        Matrix actual = matrixCalc.sum(matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(sum, matrix1, matrix2, 0);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testAddNormal_5() {
+        Matrix matrix1 = new Matrix(2, 3);
+        double[][] arr1 = {{-2.5, 3.25, 0}, {7.0, -1.125, 3.6}};
+        matrix1.setArray(arr1);
+
+        Matrix matrix2 = new Matrix(2, 3);
+        double[][] arr2 = {{3.2, -3.25, 4.25}, {-5.5, 2.25, -4.8}};
+        matrix2.setArray(arr2);
+
+        Matrix expected =  new Matrix(2, 3);
+        double[][] arr = {{0.7, 0.0, 4.25}, {1.5, 1.125, -1.2}};
+        expected.setArray(arr);
+
+        Matrix actual = matrixCalc.makeOperation(sum, matrix1, matrix2, 0);
         assertEquals(expected, actual);
     }
 
@@ -104,7 +118,7 @@ public class MatrixAddTest {
         double[][] arr = {{0, 0}, {0, 0}};
         expected.setArray(arr);
 
-        Matrix actual = matrixCalc.sum(matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(sum, matrix1, matrix2, 0);
         assertEquals(expected, actual);
     }
 
@@ -122,7 +136,7 @@ public class MatrixAddTest {
         double[][] arr = {{12}};
         expected.setArray(arr);
 
-        Matrix actual = matrixCalc.sum(matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(sum, matrix1, matrix2, 0);
         assertEquals(expected, actual);
     }
 
@@ -130,7 +144,7 @@ public class MatrixAddTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     @Test
-    public void testMultiplyImproperNLines() {
+    public void testAddImproperNLines() {
         Matrix matrix1 = new Matrix(3, 2);
         double[][] arr1 = {{1, 2}, {3, 4}, {5, 6}};
         matrix1.setArray(arr1);
@@ -141,7 +155,7 @@ public class MatrixAddTest {
 
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("different number of lines or columns");
-        matrixCalc.sum(matrix1, matrix2);
+        matrixCalc.makeOperation(sum, matrix1, matrix2, 0);
     }
 
     @Test
@@ -156,7 +170,7 @@ public class MatrixAddTest {
 
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("different number of lines or columns");
-        matrixCalc.sum(matrix1, matrix2);
+        matrixCalc.makeOperation(sum, matrix1, matrix2, 0);
     }
 
     @Test
@@ -169,7 +183,7 @@ public class MatrixAddTest {
 
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("less than one line or column");
-        matrixCalc.sum(matrix1, matrix2);
+        matrixCalc.makeOperation(sum, matrix1, matrix2, 0);
     }
 
     @Test
@@ -182,137 +196,21 @@ public class MatrixAddTest {
 
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("less than one line or column");
-        matrixCalc.sum(matrix1, matrix2);
+        matrixCalc.makeOperation(sum, matrix1, matrix2, 0);
     }
 
-    /*@Test
-    public void testSubtractNormal_1() {
+    @Test
+    public void testAddWrongNLines() {
         Matrix matrix1 = new Matrix(2, 2);
-        double[][] arr1 = {{1, 2}, {3, 4}};
-        matrix1.setArray(arr1);
-
-        Matrix matrix2 = new Matrix(2, 2);
-        double[][] arr2 = {{0, 0}, {0, 0}};
-        matrix2.setArray(arr2);
-
-        Matrix expected = matrix1;
-        Matrix actual = matrix1.subtract(matrix2);
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testSubtractNormal_2() {
-        Matrix matrix1 = new Matrix(2, 2);
-        double[][] arr1 = {{6, 8}, {10, 12}};
-        matrix1.setArray(arr1);
-
-        Matrix matrix2 = new Matrix(2, 2);
-        double[][] arr2 = {{5, 6}, {7, 8}};
-        matrix2.setArray(arr2);
-
-        Matrix expected =  new Matrix(2, 2);
-        double[][] arr = {{1, 2}, {3, 4}};
-        expected.setArray(arr);
-
-        Matrix actual = matrix1.subtract(matrix2);
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testSubtractNormal_3() {
-        Matrix matrix1 = new Matrix(3, 2);
-        double[][] arr1 = {{8, 8}, {8, 8}, {8, 8}};
-        matrix1.setArray(arr1);
-
-        Matrix matrix2 = new Matrix(3, 2);
-        double[][] arr2 = {{7, 6}, {5, 4}, {3, 2}};
-        matrix2.setArray(arr2);
-
-        Matrix expected =  new Matrix(3, 2);
-        double[][] arr = {{1, 2}, {3, 4}, {5, 6}};
-        expected.setArray(arr);
-
-        Matrix actual = matrix1.subtract(matrix2);
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testSubtractNormal_4() {
-        Matrix matrix1 = new Matrix(1, 3);
-        double[][] arr1 = {{10, 20, 30}};
-        matrix1.setArray(arr1);
-
-        Matrix matrix2 = new Matrix(1, 3);
-        double[][] arr2 = {{3, 15, 18}};
-        matrix2.setArray(arr2);
-
-        Matrix expected =  new Matrix(1, 3);
-        double[][] arr = {{7, 5, 12}};
-        expected.setArray(arr);
-
-        Matrix actual = matrix1.subtract(matrix2);
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testSubtractBorder_1() {
-        Matrix matrix1 = new Matrix(2, 2);
-        double[][] arr1 = {{1, 2}, {3, 4}};
-        matrix1.setArray(arr1);
-
-        Matrix matrix2 = new Matrix(2, 2);
-        double[][] arr2 = {{1, 2}, {3, 4}};
-        matrix2.setArray(arr2);
-
-        Matrix expected = new Matrix(2, 2);
-        double[][] arr = {{0, 0}, {0, 0}};
-        expected.setArray(arr);
-
-        Matrix actual = matrix1.subtract(matrix2);
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testSubtractBorder_2() {
-        Matrix matrix1 = new Matrix(1, 1);
-        double[][] arr1 = {{12}};
-        matrix1.setArray(arr1);
-
-        Matrix matrix2 = new Matrix(1, 1);
-        double[][] arr2 = {{7}};
-        matrix2.setArray(arr2);
-
-        Matrix expected =  new Matrix(1, 1);
-        double[][] arr = {{5}};
-        expected.setArray(arr);
-
-        Matrix actual = matrix1.subtract(matrix2);
-        assertEquals(expected, actual);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSubtractAbnormal_1() {
-        Matrix matrix1 = new Matrix(3, 2);
-        double[][] arr1 = {{1, 2}, {3, 4}, {5, 6}};
-        matrix1.setArray(arr1);
-
-        Matrix matrix2 = new Matrix(2, 3);
-        double[][] arr2 = {{5, 6, 7}, {1, 2, 3}};
-        matrix2.setArray(arr2);
-
-        Matrix actual = matrix1.subtract(matrix2);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSubtractAbnormal_2() {
-        Matrix matrix1 = new Matrix(-2, 2);
-        double[][] arr1 = {{1, 2}, {3, 4}};
+        double[][] arr1 = {{3, -1}, {-4, 7}, {1, 2}};
         matrix1.setArray(arr1);
 
         Matrix matrix2 = new Matrix(2, 2);
         double[][] arr2 = {{5, 6}, {3, 7}};
         matrix2.setArray(arr2);
 
-        Matrix actual = matrix1.subtract(matrix2);
-    }*/
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage("different number of lines (columns)");
+        matrixCalc.makeOperation(sum, matrix1, matrix2, 0);
+    }
 }

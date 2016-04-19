@@ -3,11 +3,16 @@ package ua.goit.group09.coreProject.logic;
 import ua.goit.group09.coreProject.data.Matrix;
 
 /**
- * Interface with matrix arithmetic logic
+ * Interface with matrix operations
  */
 public interface MatrixCalc {
-    Matrix sum(Matrix addend1, Matrix addend2);
-    Matrix subtract(Matrix minuend, Matrix subtrahend);
-    Matrix multiply(Matrix multiplier1, Matrix multiplier2);
-    Matrix multiply(double number, Matrix multiplier);
+    /**
+     * makes given math operation with to given matrices or matrix #1 and number
+     * @param mathOperation     type of math operation (sum, subtract, multiply)
+     * @param matrix1           first matrix to be operated
+     * @param matrix2           second matrix to be operated (if it's needed to given type of math operation)
+     * @param number            number to be operated (if it's needed to given type of math operation)
+     * @return                  result of given operation
+     */
+    Matrix makeOperation(MathOperation mathOperation, Matrix matrix1, Matrix matrix2, double number);
 }

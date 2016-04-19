@@ -3,7 +3,7 @@ package ua.goit.group09.coreProject.logic;
 import ua.goit.group09.coreProject.data.Matrix;
 
 /**
- * Class - decorator for the class MatrixCalc, checks if given matrices are valid
+ * Class-decorator for the class MatrixCalc, checks if given matrices are valid
  */
 public class MatricesValidator implements MatrixCalc {
 
@@ -16,62 +16,47 @@ public class MatricesValidator implements MatrixCalc {
     }
 
     /**
-     * Checks if given matrices with data are valid, than invokes method sum from decorated class
-     * @param addend1       addend matrix #1
-     * @param addend2       addend matrix #2
-     * @return              result of summation
+     * makes validation of given matrices, than invokes the same method of super class to make math operation
+     * chosen math operation with to given matrices or matrix #1 and number
+     * @param mathOperation     type of math operation (sum, subtract, multiply)
+     * @param matrix1           first matrix to be operated
+     * @param matrix2           second matrix to be operated (if it's needed to given type of math operation)
+     * @param number            number to be operated (if it's needed to given type of math operation)
+     * @return                  result of given operation
      */
     @Override
-    public Matrix sum(Matrix addend1, Matrix addend2) {
-        if (isNotValid(addend1) || isNotValid(addend2)) {
-            throw new IllegalArgumentException("Matrix has less than one line or column!");
-        }
-        return this.origin.sum(addend1, addend2);
+    public Matrix makeOperation(MathOperation mathOperation, Matrix matrix1, Matrix matrix2, double number) {
+        check(matrix1);
+        if (isNeedToCheckSecondMatrix(mathOperation))
+            check(matrix2);
+        return this.origin.makeOperation(mathOperation, matrix1, matrix2, number);
     }
 
-    /**
-     * Checks if given matrices with data are valid, than invokes method subtract from decorated class
-     * @param minuend       minuend matrix
-     * @param subtrahend    subtrahend matrix
-     * @return              result of subtract
-     */
-    @Override
-    public Matrix subtract(Matrix minuend, Matrix subtrahend) {
-        if (isNotValid(minuend) || isNotValid(subtrahend)) {
+    private void check(Matrix matrix) {
+        if (matrix == null) {
+            throw new IllegalArgumentException("Matrix object points to null!");
+        }
+        if (isNotValid(matrix)) {
             throw new IllegalArgumentException("Matrix has less than one line or column!");
         }
-        return this.origin.subtract(minuend, subtrahend);
-    }
-
-    /**
-     * Checks if given matrices with data are valid, than invokes method multiply from decorated class
-     * @param multiplier1       multiplied matrix #1
-     * @param multiplier2       multiplied matrix #2
-     * @return                  result of multiplication
-     */
-    @Override
-    public Matrix multiply(Matrix multiplier1, Matrix multiplier2) {
-        if (isNotValid(multiplier1) || isNotValid(multiplier2)) {
-            throw new IllegalArgumentException("Matrix has less than one line or column!");
+        if (hasDifferentNLinesOrColumns(matrix)) {
+            throw new IllegalArgumentException("Matrix has different number of lines (columns) in field and array!");
         }
-        return this.origin.multiply(multiplier1, multiplier2);
+
     }
 
-    /**
-     * Checks if given matriх with data is valid, than invokes method multiply from decorated class
-     * @param number
-     * @param multiplier
-     * @return
-     */
-    @Override
-    public Matrix multiply(double number, Matrix multiplier) {
-        if (isNotValid(multiplier)) {
-            throw new IllegalArgumentException("Matrix has less than one line or column!");
-        }
-        return this.origin.multiply(number, multiplier);
+    // checks if operation will be done with two matrices and it's necessary to check second matrix
+    private static boolean isNeedToCheckSecondMatrix(MathOperation mathOperation) {
+        return mathOperation != MathOperation.MULTIPLY_NUMBER_AND_MATRIX;
     }
 
+    // checks if given matrix has less than one line or column
     private static boolean isNotValid(Matrix matrix) {
         return matrix.getLines() < 1 || matrix.getColumns() < 1;
+    }
+
+    // checks if given matrix has different number of lines (columns) in field lines(columns) and array
+    private static boolean hasDifferentNLinesOrColumns(Matrix matrix) {
+        return matrix.getLines() != matrix.getArray().length || matrix.getColumns() != matrix.getArray()[0].length;
     }
 }

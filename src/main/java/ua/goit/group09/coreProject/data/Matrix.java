@@ -6,6 +6,8 @@ import java.util.Arrays;
  * Class with matrix data
  */
 public class Matrix {
+    /* permissible error of the comparison */
+    public static final double DELTA = 10E-9;
     /* number of lines in matrix */
     private int lines;
     /* number of columns in matrix */
@@ -66,7 +68,12 @@ public class Matrix {
 
         if (lines != that.lines) return false;
         if (columns != that.columns) return false;
-        return Arrays.deepEquals(array, that.array);
+        for (int i = 0; i < lines; i++) {
+            for (int j = 0; j < columns; j++) {
+                if (Math.abs(array[i][j] - that.array[i][j]) > DELTA) return false;
+            }
+        }
+        return true;
     }
 
     @Override

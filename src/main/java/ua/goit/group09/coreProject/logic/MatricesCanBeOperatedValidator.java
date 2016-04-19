@@ -16,62 +16,37 @@ public class MatricesCanBeOperatedValidator implements MatrixCalc {
     }
 
     /**
-     * Checks if given matrices can be added, than invokes method sum from decorated class
-     * @param addend1       addend matrix #1
-     * @param addend2       addend matrix #2
-     * @return              result of summation
+     * checks number of lines and columns of given matrices to determine that they can be operated,
+     * than invokes the same method of super class to make math operation
+     * @param mathOperation     type of math operation (sum, subtract, multiply)
+     * @param matrix1           first matrix to be operated
+     * @param matrix2           second matrix to be operated (if it's needed to given type of math operation)
+     * @param number            number to be operated (if it's needed to given type of math operation)
+     * @return                  result of given operation
      */
     @Override
-    public Matrix sum(Matrix addend1, Matrix addend2) {
-        if (isImpossibleToAddSubtrat(addend1, addend2)) {
-            throw new IllegalArgumentException
-                    ("Added matrices have different number of lines or columns to sum!");
+    public Matrix makeOperation(MathOperation mathOperation, Matrix matrix1, Matrix matrix2, double number) {
+        switch (mathOperation) {
+            case SUM_MATRICES:
+            case SUBTRACT_MATRICES: {
+                if (isImpossibleToAddSubtrat(matrix1, matrix2)) {
+                    throw new IllegalArgumentException
+                            ("Added matrices have different number of lines or columns to sum!");
+                }
+            }
+            break;
+            case MULTIPLY_MATRICES: {
+                if (isImpossibleToMultiply(matrix1, matrix2)) {
+                    throw new IllegalArgumentException
+                            ("Second multiplied matrix has improper number of lines to multiply!");
+                }
+            }
+            break;
         }
-        return this.origin.sum(addend1, addend2);
+        return this.origin.makeOperation(mathOperation, matrix1, matrix2, number);
     }
 
-    /**
-     * Checks if given matrices can be subtracted, than invokes method subtract from decorated class
-     * @param minuend       minuend matrix
-     * @param subtrahend    subtrahend matrix
-     * @return              result of subtract
-     */
-    @Override
-    public Matrix subtract(Matrix minuend, Matrix subtrahend) {
-        if (isImpossibleToAddSubtrat(minuend, subtrahend)) {
-            throw new IllegalArgumentException
-                    ("Added matrices have different number of lines or columns to subtract!");
-        }
-        return this.origin.subtract(minuend, subtrahend);
-    }
-
-    /**
-     * Checks if given matrices with data are valid, than invokes method multiply from decorated class
-     * @param multiplier1       multiplied matrix #1
-     * @param multiplier2       multiplied matrix #2
-     * @return                  result of multiplication
-     */
-    @Override
-    public Matrix multiply(Matrix multiplier1, Matrix multiplier2) {
-        if (isImpossibleToMultiply(multiplier1, multiplier2)) {
-            throw new IllegalArgumentException
-                    ("Second multiplied matrix has improper number of lines to multiply!");
-        }
-        return this.origin.multiply(multiplier1, multiplier2);
-    }
-
-    /**
-     * Checks if given matriх with data is valid, than invokes method multiply from decorated class
-     * @param number
-     * @param multiplier
-     * @return
-     */
-    @Override
-    public Matrix multiply(double number, Matrix multiplier) {
-        return this.origin.multiply(number, multiplier);
-    }
-
-    // checks if given matrix can be added or subtracted
+   // checks if given matrix can be added or subtracted
     private boolean isImpossibleToAddSubtrat(Matrix matrix1, Matrix matrix2) {
         return matrix1.getLines() != matrix2.getLines() ||
                 matrix1.getColumns() != matrix2.getColumns();

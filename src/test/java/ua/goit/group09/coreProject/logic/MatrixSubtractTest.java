@@ -1,13 +1,9 @@
-package ua.goit.group09.coreProject;
+package ua.goit.group09.coreProject.logic;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import ua.goit.group09.coreProject.data.Matrix;
-import ua.goit.group09.coreProject.logic.MatrixCalc;
-import ua.goit.group09.coreProject.logic.MatrixCalcDefault;
-import ua.goit.group09.coreProject.logic.MatricesCanBeOperatedValidator;
-import ua.goit.group09.coreProject.logic.MatricesValidator;
 
 import static org.junit.Assert.*;
 
@@ -15,10 +11,11 @@ import static org.junit.Assert.*;
  * Testing class for method subtract of class MatrixCalcDefault
  */
 public class MatrixSubtractTest {
-    MatrixCalc matrixCalc =
-            new MatricesValidator
+    private static MatrixCalc matrixCalc =
+            (new MatricesValidator
                     (new MatricesCanBeOperatedValidator
-                            (new MatrixCalcDefault()));
+                            (new MatrixCalcDefault())));
+    MathOperation subtract = MathOperation.SUBTRACT_MATRICES;
 
     @Test
     public void testSubtractNormal_1() {
@@ -31,7 +28,7 @@ public class MatrixSubtractTest {
         matrix2.setArray(arr2);
 
         Matrix expected = matrix1;
-        Matrix actual = matrixCalc.subtract(matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
         assertEquals(expected, actual);
     }
 
@@ -49,7 +46,7 @@ public class MatrixSubtractTest {
         double[][] arr = {{1, 2}, {3, 4}};
         expected.setArray(arr);
 
-        Matrix actual = matrixCalc.subtract(matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
         assertEquals(expected, actual);
     }
 
@@ -67,7 +64,7 @@ public class MatrixSubtractTest {
         double[][] arr = {{1, 2}, {3, 4}, {5, 6}};
         expected.setArray(arr);
 
-        Matrix actual = matrixCalc.subtract(matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
         assertEquals(expected, actual);
     }
 
@@ -85,7 +82,25 @@ public class MatrixSubtractTest {
         double[][] arr = {{7, 5, 12}};
         expected.setArray(arr);
 
-        Matrix actual = matrixCalc.subtract(matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testSubtractNormal_5() {
+        Matrix matrix1 = new Matrix(2, 3);
+        double[][] arr1 = {{-2.5, 3.25, 0}, {7.0, -1.125, 3.6}};
+        matrix1.setArray(arr1);
+
+        Matrix matrix2 = new Matrix(2, 3);
+        double[][] arr2 = {{3.2, -3.25, 4.25}, {-5.5, 2.25, -4.8}};
+        matrix2.setArray(arr2);
+
+        Matrix expected =  new Matrix(2, 3);
+        double[][] arr = {{-5.7, 6.5, -4.25}, {12.5, -3.375, 8.4}};
+        expected.setArray(arr);
+
+        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
         assertEquals(expected, actual);
     }
 
@@ -103,7 +118,7 @@ public class MatrixSubtractTest {
         double[][] arr = {{0, 0}, {0, 0}};
         expected.setArray(arr);
 
-        Matrix actual = matrixCalc.subtract(matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
         assertEquals(expected, actual);
     }
 
@@ -121,7 +136,7 @@ public class MatrixSubtractTest {
         double[][] arr = {{5}};
         expected.setArray(arr);
 
-        Matrix actual = matrixCalc.subtract(matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
         assertEquals(expected, actual);
     }
 
@@ -140,7 +155,7 @@ public class MatrixSubtractTest {
 
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("different number of lines or columns");
-        matrixCalc.subtract(matrix1, matrix2);
+        matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
     }
 
     @Test
@@ -155,7 +170,7 @@ public class MatrixSubtractTest {
 
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("different number of lines or columns");
-        matrixCalc.subtract(matrix1, matrix2);
+        matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
     }
 
     @Test
@@ -168,7 +183,7 @@ public class MatrixSubtractTest {
 
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("less than one line or column");
-        matrixCalc.subtract(matrix1, matrix2);
+        matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
     }
 
     @Test
@@ -181,6 +196,21 @@ public class MatrixSubtractTest {
 
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("less than one line or column");
-        matrixCalc.subtract(matrix1, matrix2);
+        matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
+    }
+
+    @Test
+    public void testSubtractWrongNColumns() {
+        Matrix matrix1 = new Matrix(2, 2);
+        double[][] arr1 = {{3, -1, 3}, {-4, 7, -2}};
+        matrix1.setArray(arr1);
+
+        Matrix matrix2 = new Matrix(2, 2);
+        double[][] arr2 = {{5, 6}, {3, 7}};
+        matrix2.setArray(arr2);
+
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage("different number of lines (columns)");
+        matrixCalc.makeOperation(subtract, matrix1, matrix2, 0);
     }
 }

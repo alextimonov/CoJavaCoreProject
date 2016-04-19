@@ -1,4 +1,4 @@
-package ua.goit.group09.coreProject.controller;
+package ua.goit.group09.coreProject.logic;
 
 /**
  * Enum with types of math operations for matrices
