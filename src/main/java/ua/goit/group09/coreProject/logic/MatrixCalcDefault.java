@@ -45,15 +45,13 @@ public class MatrixCalcDefault implements MatrixCalc {
      * @return result of summation
      */
     public Matrix sum(Matrix addend1, Matrix addend2) {
-        Matrix resultMatrix = new Matrix(addend1.getLines(), addend1.getColumns());
         double[][] resultArray = new double[addend1.getLines()][addend1.getColumns()];
         for (int i = 0; i < addend1.getLines(); i++) {
             for (int j = 0; j < addend1.getColumns(); j++) {
                 resultArray[i][j] = addend1.getArray()[i][j] + addend2.getArray()[i][j];
             }
         }
-        resultMatrix.setArray(resultArray);
-        return resultMatrix;
+        return new Matrix(resultArray);
     }
 
     /**
@@ -63,15 +61,13 @@ public class MatrixCalcDefault implements MatrixCalc {
      * @return result of subtract
      */
     public Matrix subtract(Matrix minuend, Matrix subtrahend) {
-        Matrix resultMatrix = new Matrix(minuend.getLines(), minuend.getColumns());
         double[][] resultArray = new double[minuend.getLines()][minuend.getColumns()];
         for (int i = 0; i < minuend.getLines(); i++) {
             for (int j = 0; j < minuend.getColumns(); j++) {
                 resultArray[i][j] = minuend.getArray()[i][j] - subtrahend.getArray()[i][j];
             }
         }
-        resultMatrix.setArray(resultArray);
-        return resultMatrix;
+        return new Matrix(resultArray);
     }
 
     /**
@@ -81,7 +77,6 @@ public class MatrixCalcDefault implements MatrixCalc {
      * @return result of multiplication
      */
     public Matrix multiply(Matrix multiplier1, Matrix multiplier2) {
-        Matrix resultMatrix = new Matrix(multiplier1.getLines(), multiplier2.getColumns());
         double[][] resultArray = new double[multiplier1.getLines()][multiplier2.getColumns()];
         for (int i = 0; i < multiplier1.getLines(); i++) {
             for (int j = 0; j < multiplier2.getColumns(); j++) {
@@ -91,8 +86,7 @@ public class MatrixCalcDefault implements MatrixCalc {
                 }
             }
         }
-        resultMatrix.setArray(resultArray);
-        return resultMatrix;
+        return new Matrix(resultArray);
     }
 
     /**
@@ -102,14 +96,12 @@ public class MatrixCalcDefault implements MatrixCalc {
      * @return
      */
     public Matrix multiply(double number, Matrix multiplier) {
-        Matrix resultMatrix = new Matrix(multiplier.getLines(), multiplier.getColumns());
         double[][] resultArray = new double[multiplier.getLines()][multiplier.getColumns()];
         for (int i = 0; i < multiplier.getLines(); i++) {
             for (int j = 0; j < multiplier.getColumns(); j++) {
                 resultArray[i][j] = number * multiplier.getArray()[i][j];
             }
         }
-        resultMatrix.setArray(resultArray);
-        return resultMatrix;
+        return new Matrix(resultArray);
     }
 }

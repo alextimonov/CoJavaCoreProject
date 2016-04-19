@@ -7,7 +7,7 @@ import ua.goit.group09.coreProject.view.*;
 import java.util.Scanner;
 
 /**
- * Running class to provide user's interface to work with class Matrix
+ * Runner class to provide user's interface to work with class Matrix
  */
 public class MatrixCalcRunner {
     public static final int CHOICE_SUM_MATRICES = 1;
@@ -26,7 +26,9 @@ public class MatrixCalcRunner {
         runUserInterface();
     }
 
-    // provides user's interface with menu to make a choice
+    /**
+     * provides user's interface with menu to make a choice
+     */
     public static void runUserInterface() {
         boolean isNeedToRun = true;
         Scanner sc = new Scanner(System.in);

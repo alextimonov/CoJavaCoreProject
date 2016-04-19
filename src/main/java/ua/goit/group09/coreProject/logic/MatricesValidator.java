@@ -27,13 +27,13 @@ public class MatricesValidator implements MatrixCalc {
      */
     @Override
     public Matrix makeOperation(MathOperation mathOperation, Matrix matrix1, Matrix matrix2, double number) {
-        check(matrix1);
+        makeValidation(matrix1);
         if (isNeedToCheckSecondMatrix(mathOperation))
-            check(matrix2);
+            makeValidation(matrix2);
         return this.origin.makeOperation(mathOperation, matrix1, matrix2, number);
     }
 
-    private void check(Matrix matrix) {
+    private void makeValidation(Matrix matrix) {
         if (matrix == null) {
             throw new MatrixNullPointerException("Matrix object points to null!");
         }
@@ -43,10 +43,9 @@ public class MatricesValidator implements MatrixCalc {
         if (hasDifferentNLinesOrColumns(matrix)) {
             throw new WrongNLinesColumnsException("Matrix has different number of lines (columns) in field and array!");
         }
-
     }
 
-    // checks if operation will be done with two matrices and it's necessary to check second matrix
+    // checks if operation will be done with two matrices and it's necessary to makeValidation second matrix
     private static boolean isNeedToCheckSecondMatrix(MathOperation mathOperation) {
         return mathOperation != MathOperation.MULTIPLY_NUMBER_AND_MATRIX;
     }
