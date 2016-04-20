@@ -13,7 +13,6 @@ public enum MathOperation {
     // multiplier for multiplication of double number and matrix
     private double doubleMultiplier;
 
-    // ========= Getter & Setter ===========
     public double getDoubleMultiplier() {
         return doubleMultiplier;
     }

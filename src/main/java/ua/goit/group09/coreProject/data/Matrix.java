@@ -22,10 +22,8 @@ public final class Matrix {
         this.array = matrix.array;
     }
 
-    /* ================ Getters =================== */
-
     public double[][] getArray() {
-        return new MatrixContainer(this).getMatrix().array;
+        return array.clone();
     }
 
     public int getLines() {

@@ -14,13 +14,10 @@ public class InputMatrix {
      * @return          matrix with inputted number of lines, columns and elements of array
      */
     public static Matrix inputMatrixData() {
-//        Matrix matrix = new Matrix(array);
-//        matrix.setLines(inputNumberLines());
-//        matrix.setColumns(inputNumberColumns());
         int lines = inputNumberLines();
         int columns = inputNumberColumns();
-//        matrix.setArray(inputArray(matrix.getLines(), matrix.getColumns()));
-        return new Matrix(inputArray(lines, columns));
+        double[][] array = inputArray(lines, columns);
+        return new Matrix(array);
     }
 
     /**

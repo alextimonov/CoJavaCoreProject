@@ -16,25 +16,10 @@ public class MatrixCalcDefault implements MatrixCalc {
      */
     @Override
     public Matrix makeOperation(MathOperation mathOperation, Matrix matrix1, Matrix matrix2) {
-        Matrix result = null;
-        switch (mathOperation) {
-            case SUM_MATRICES: {
-                result = sum(matrix1, matrix2);
-            }
-            break;
-            case SUBTRACT_MATRICES: {
-                result = subtract(matrix1, matrix2);
-            }
-            break;
-            case MULTIPLY_MATRICES: {
-                result = multiply(matrix1, matrix2);
-            }
-            break;
-            case MULTIPLY_NUMBER_AND_MATRIX: {
-                result = multiply(matrix1, mathOperation.getDoubleMultiplier());
-            }
-        }
-        return result;
+
+        EvaluatorFactory factory = new EvaluatorFactory();
+        Evaluator evaluator = factory.getEvaluator(mathOperation);
+        return evaluator.evaluate(mathOperation, matrix1, matrix2);
     }
 
     /**
@@ -42,7 +27,7 @@ public class MatrixCalcDefault implements MatrixCalc {
      * @param addend1 addend matrix #1
      * @param addend2 addend matrix #2
      * @return result of summation
-     */
+     *//*
     public Matrix sum(Matrix addend1, Matrix addend2) {
         double[][] resultArray = new double[addend1.getLines()][addend1.getColumns()];
         for (int i = 0; i < addend1.getLines(); i++) {
@@ -53,12 +38,12 @@ public class MatrixCalcDefault implements MatrixCalc {
         return new Matrix(resultArray);
     }
 
-    /**
+    *//**
      * finds the difference of two matrices
      * @param minuend    minuend matrix
      * @param subtrahend subtrahend matrix
      * @return result of subtract
-     */
+     *//*
     public Matrix subtract(Matrix minuend, Matrix subtrahend) {
         double[][] resultArray = new double[minuend.getLines()][minuend.getColumns()];
         for (int i = 0; i < minuend.getLines(); i++) {
@@ -69,12 +54,12 @@ public class MatrixCalcDefault implements MatrixCalc {
         return new Matrix(resultArray);
     }
 
-    /**
+    *//**
      * finds the multiplication of two matrices
      * @param multiplier1 multiplied matrix #1
      * @param multiplier2 multiplied matrix #2
      * @return result of multiplication
-     */
+     *//*
     public Matrix multiply(Matrix multiplier1, Matrix multiplier2) {
         double[][] resultArray = new double[multiplier1.getLines()][multiplier2.getColumns()];
         for (int i = 0; i < multiplier1.getLines(); i++) {
@@ -88,12 +73,12 @@ public class MatrixCalcDefault implements MatrixCalc {
         return new Matrix(resultArray);
     }
 
-    /**
+    *//**
      * finds the multiplication of double number and matrix
      * @param number
      * @param matrix
      * @return
-     */
+     *//*
     public Matrix multiply(Matrix matrix, double number) {
         double[][] resultArray = new double[matrix.getLines()][matrix.getColumns()];
         for (int i = 0; i < matrix.getLines(); i++) {
@@ -102,5 +87,5 @@ public class MatrixCalcDefault implements MatrixCalc {
             }
         }
         return new Matrix(resultArray);
-    }
+    }*/
 }

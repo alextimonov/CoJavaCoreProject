@@ -82,6 +82,7 @@ public class MatrixCalcRunner {
         double number = 0;
         if (mathOperation.equals(MathOperation.MULTIPLY_NUMBER_AND_MATRIX)) {
             number = InputMatrix.inputDouble("Input double multiplier:");
+            mathOperation.setDoubleMultiplier(number);
         }
         else {
             matrix2 = InputMatrix.inputMatrixData();

@@ -40,6 +40,7 @@ public class OutputMatrix {
     private static String outputArray(double[] lineOfDoubles) {
         StringBuilder sb = new StringBuilder();
         for (int j = 0; j < lineOfDoubles.length; j++) {
+            //TODO align output
             sb.append(lineOfDoubles[j]).append(SPACE);
         }
         return sb.toString();
