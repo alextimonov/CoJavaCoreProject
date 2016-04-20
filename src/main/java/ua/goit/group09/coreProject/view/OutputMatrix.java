@@ -40,8 +40,7 @@ public class OutputMatrix {
     private static String outputArray(double[] lineOfDoubles) {
         StringBuilder sb = new StringBuilder();
         for (int j = 0; j < lineOfDoubles.length; j++) {
-            //TODO align output
-            sb.append(lineOfDoubles[j]).append(SPACE);
+            sb.append(String.format("%8.3f ", lineOfDoubles[j]));
         }
         return sb.toString();
     }

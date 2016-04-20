@@ -32,6 +32,7 @@ public class MatricesValidator implements MatrixCalc {
         return this.origin.makeOperation(mathOperation, matrix1, matrix2);
     }
 
+    // checks if matrix object points to null
     private void makeValidation(Matrix matrix) {
         if (matrix == null) {
             throw new MatrixNullPointerException("Matrix object points to null!");

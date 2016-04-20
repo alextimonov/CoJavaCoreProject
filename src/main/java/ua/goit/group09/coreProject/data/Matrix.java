@@ -17,11 +17,6 @@ public final class Matrix {
         this.array = array.clone();
     }
 
-    /* Constructor for defencive copy */
-    public Matrix(Matrix matrix) {
-        this.array = matrix.array;
-    }
-
     public double[][] getArray() {
         return array.clone();
     }
