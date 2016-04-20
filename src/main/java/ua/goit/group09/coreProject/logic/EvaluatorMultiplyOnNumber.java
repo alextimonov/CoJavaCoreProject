@@ -3,7 +3,7 @@ package ua.goit.group09.coreProject.logic;
 import ua.goit.group09.coreProject.data.Matrix;
 
 /**
- * Created by Alex on 20.04.2016.
+ * Class with realisation of evaluation the multiplication of double number and matrix
  */
 public class EvaluatorMultiplyOnNumber implements Evaluator {
 
