@@ -37,6 +37,13 @@ public class MatricesValidator implements MatrixCalc {
         if (matrix == null) {
             throw new MatrixNullPointerException("Matrix object points to null!");
         }
+        int columns = matrix.getColumns();
+        for (int i = 0; i < matrix.getLines(); i++) {
+            if (matrix.getArray()[i].length != columns) {
+                throw new MatrixHasDifferentNColumnsException
+                        ("Number of elements in line" + i + "differs from number of elements in first line!");
+            }
+        }
     }
 
     // checks if operation will be done with two matrices and it's necessary to makeValidation second matrix

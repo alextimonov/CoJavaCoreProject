@@ -5,7 +5,7 @@ package ua.goit.group09.coreProject.exceptions;
  */
 public class MatrixValidationException extends IllegalArgumentException {
 
-    public MatrixValidationException(String s) {
-        super(s);
+    public MatrixValidationException(String message) {
+        super(message);
     }
 }

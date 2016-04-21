@@ -4,6 +4,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import ua.goit.group09.coreProject.data.Matrix;
+import ua.goit.group09.coreProject.exceptions.MatrixHasDifferentNColumnsException;
 import ua.goit.group09.coreProject.exceptions.MatrixNullPointerException;
 
 import static org.junit.Assert.*;
@@ -102,6 +103,18 @@ public class MatrixNumberMultiplyTest {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
+
+    @Test
+    public void testMultiplyDifferentNColumns() {
+        double[][] arr1 = {{-2, 3, 0}, {7, 3}};
+        Matrix matrix1 = new Matrix(arr1);
+
+        double[][] arr2 = {{3, -3, 4}, {-5, 2, -4}};
+        Matrix matrix2 = new Matrix(arr2);
+
+        expectedException.expect(MatrixHasDifferentNColumnsException.class);
+        matrixCalc.makeOperation(multiplyNumber, matrix1, matrix2);
+    }
 
     @Test
     public void testMultiplyNullMatrix_1() {

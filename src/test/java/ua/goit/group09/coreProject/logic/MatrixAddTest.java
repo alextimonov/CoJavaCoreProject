@@ -149,6 +149,18 @@ public class MatrixAddTest {
     }
 
     @Test
+    public void testAddDifferentNColumns() {
+        double[][] arr1 = {{-2, 3, 0}, {7, 3}};
+        Matrix matrix1 = new Matrix(arr1);
+
+        double[][] arr2 = {{3, -3, 4}, {-5, 2, -4}};
+        Matrix matrix2 = new Matrix(arr2);
+
+        expectedException.expect(MatrixHasDifferentNColumnsException.class);
+        matrixCalc.makeOperation(sum, matrix1, matrix2);
+    }
+
+    @Test
     public void testAddNullMatrix_1() {
         Matrix matrix1 = null;
 
