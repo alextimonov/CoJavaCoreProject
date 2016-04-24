@@ -17,9 +17,9 @@ public class MatrixCalcRunner {
     public static final int CHOICE_EXIT = 5;
 
     private static MatrixCalc matrixCalc =
-            (new MatricesValidator
+            new MatricesValidator
                     (new MatricesCanBeOperatedValidator
-                            (new MatrixCalcDefault())));
+                            (new MatrixCalcDefault()));
     private static MatrixCalcMenu menu = new MatrixCalcMenu();
 
     public static void main(String[] args) {
