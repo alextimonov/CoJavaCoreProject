@@ -5,6 +5,14 @@ import ua.goit.group09.coreProject.data.Matrix;
 /**
  * Interface with method of evaluation different operations with matrices
  */
-public interface Evaluator {
-    Matrix evaluate(MathOperation mathOperation, Matrix matrix1, Matrix matrix2);
+public abstract class Evaluator {
+    protected double multiplier;
+
+    public void setMultiplier(double multiplier) {
+        this.multiplier = multiplier;
+    }
+
+    Matrix evaluate(Matrix matrix1, Matrix matrix2) {
+        return new Matrix(new double[][] {{}});
+    }
 }

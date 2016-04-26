@@ -16,7 +16,6 @@ public class MatrixAddTest {
             (new MatricesValidator
                     (new MatricesCanBeOperatedValidator
                             (new MatrixCalcDefault())));
-    MathOperation sum = MathOperation.SUM_MATRICES;
     Evaluator evaluator = new EvaluatorSum();
 
     @Test
@@ -28,7 +27,7 @@ public class MatrixAddTest {
         Matrix matrix2 = new Matrix(arr2);
 
         Matrix expected = matrix1;
-        Matrix actual = matrixCalc.makeOperation(sum, evaluator, matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(evaluator, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -43,7 +42,7 @@ public class MatrixAddTest {
         double[][] arr = {{6, 8}, {10, 12}};
         Matrix expected =  new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(sum, evaluator, matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(evaluator, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -58,7 +57,7 @@ public class MatrixAddTest {
         double[][] arr = {{8, 8}, {8, 8}, {8, 8}};
         Matrix expected =  new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(sum, evaluator, matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(evaluator, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -73,7 +72,7 @@ public class MatrixAddTest {
         double[][] arr = {{10, 20, 30}};
         Matrix expected =  new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(sum, evaluator, matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(evaluator, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -88,7 +87,7 @@ public class MatrixAddTest {
         double[][] arr = {{0.7, 0.0, 4.25}, {1.5, 1.125, -1.2}};
         Matrix expected =  new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(sum, evaluator, matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(evaluator, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -103,7 +102,7 @@ public class MatrixAddTest {
         double[][] arr = {{0, 0}, {0, 0}};
         Matrix expected =  new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(sum, evaluator, matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(evaluator, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -118,7 +117,7 @@ public class MatrixAddTest {
         double[][] arr = {{12}};
         Matrix expected = new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(sum, evaluator, matrix1, matrix2);
+        Matrix actual = matrixCalc.makeOperation(evaluator, matrix1, matrix2);
         assertEquals(expected, actual);
     }
 
@@ -134,7 +133,7 @@ public class MatrixAddTest {
         Matrix matrix2 = new Matrix(arr2);
 
         expectedException.expect(AddSubtractImpossibleException.class);
-        matrixCalc.makeOperation(sum, evaluator, matrix1, matrix2);
+        matrixCalc.makeOperation(evaluator, matrix1, matrix2);
     }
 
     @Test
@@ -146,7 +145,7 @@ public class MatrixAddTest {
         Matrix matrix2 = new Matrix(arr2);
 
         expectedException.expect(AddSubtractImpossibleException.class);
-        matrixCalc.makeOperation(sum, evaluator, matrix1, matrix2);
+        matrixCalc.makeOperation(evaluator, matrix1, matrix2);
     }
 
     @Test
@@ -158,7 +157,7 @@ public class MatrixAddTest {
         Matrix matrix2 = new Matrix(arr2);
 
         expectedException.expect(MatrixHasDifferentNColumnsException.class);
-        matrixCalc.makeOperation(sum, evaluator, matrix1, matrix2);
+        matrixCalc.makeOperation(evaluator, matrix1, matrix2);
     }
 
     @Test
@@ -169,7 +168,7 @@ public class MatrixAddTest {
         Matrix matrix2 = new Matrix(arr2);
 
         expectedException.expect(MatrixNullPointerException.class);
-        matrixCalc.makeOperation(sum, evaluator, matrix1, matrix2);
+        matrixCalc.makeOperation(evaluator, matrix1, matrix2);
     }
 
     @Test
@@ -180,6 +179,6 @@ public class MatrixAddTest {
         Matrix matrix2 = null;
 
         expectedException.expect(MatrixNullPointerException.class);
-        matrixCalc.makeOperation(sum, evaluator, matrix1, matrix2);
+        matrixCalc.makeOperation(evaluator, matrix1, matrix2);
     }
 }

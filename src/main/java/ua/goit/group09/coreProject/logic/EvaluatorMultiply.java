@@ -8,17 +8,16 @@ import java.util.List;
 /**
  * Class with realisation of evaluation the multiplication of two matrices using ForkJoin
  */
-public class EvaluatorMultiply implements Evaluator  {
+public class EvaluatorMultiply extends Evaluator  {
 
     /**
      * finds the multiplication of two matrices
-     * @param mathOperation       type of math operation
      * @param matrix1             multiplied matrix #1
      * @param matrix2             multiplied matrix #2
      * @return result of multiplication
      */
     @Override
-    public Matrix evaluate(MathOperation mathOperation, Matrix matrix1, Matrix matrix2) {
+    public Matrix evaluate(Matrix matrix1, Matrix matrix2) {
         double[][] resultArray = new double[matrix1.getLines()][matrix2.getColumns()];
         List<ForkJoinMultiplier> listTasks = new LinkedList<>();
         for (int i = 0; i < matrix1.getLines(); i++) {

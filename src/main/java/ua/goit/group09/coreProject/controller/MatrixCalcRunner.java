@@ -41,23 +41,23 @@ public class MatrixCalcRunner {
                 int usersChoice = Integer.parseInt(s);
                 switch (usersChoice) {
                     case CHOICE_SUM_MATRICES: {
-                        evaluator = new EvaluatorSum();
-                        makeMathOperation(MathOperation.SUM_MATRICES, evaluator);
+                        ConsolePrinter.printLine("Chosen operation is SUM MATRICES.");
+                        makeMathOperation(usersChoice, new EvaluatorSum());
                     }
                     break;
                     case CHOICE_SUBTRACT_MATRICES: {
-                        evaluator = new EvaluatorSubtract();
-                        makeMathOperation(MathOperation.SUBTRACT_MATRICES, evaluator);
+                        ConsolePrinter.printLine("Chosen operation is SUBTRACT MATRICES.");
+                        makeMathOperation(usersChoice, new EvaluatorSubtract());
                     }
                     break;
                     case CHOICE_MULT_MATRICES: {
-                        evaluator = new EvaluatorMultiply();
-                        makeMathOperation(MathOperation.MULTIPLY_MATRICES, evaluator);
+                        ConsolePrinter.printLine("Chosen operation is MULTIPLY MATRICES.");
+                        makeMathOperation(usersChoice, new EvaluatorMultiply());
                     }
                     break;
                     case CHOICE_MULT_NUMBER: {
-                        evaluator = new EvaluatorMultiplyOnNumber();
-                        makeMathOperation(MathOperation.MULTIPLY_NUMBER_AND_MATRIX, evaluator);
+                        ConsolePrinter.printLine("Chosen operation is MULTIPLY MATRIX ON NUMBER.");
+                        makeMathOperation(usersChoice, new EvaluatorMultiplyOnNumber());
                     }
                     break;
                     case CHOICE_EXIT: {
@@ -77,17 +77,16 @@ public class MatrixCalcRunner {
     }
 
     // makes chosen by user math operation: invokes input of arguments and then chosen operation
-    private static void makeMathOperation(MathOperation mathOperation, Evaluator evaluator) {
-        ConsolePrinter.printLine("Chosen operation is " + mathOperation.toString());
+    private static void makeMathOperation(int usersChoice, Evaluator evaluator) {
         Matrix matrix1 = InputMatrix.inputMatrixData();
         ConsolePrinter.printLine("Inputted matrix #1:");
         ConsolePrinter.printLineList(OutputMatrix.matrixToStringList(matrix1));
 
         Matrix matrix2 = null;
         double number = 0;
-        if (mathOperation.equals(MathOperation.MULTIPLY_NUMBER_AND_MATRIX)) {
+        if (evaluator.getClass() == EvaluatorMultiplyOnNumber.class) {
             number = InputMatrix.inputDouble("Input double multiplier:");
-            mathOperation.setDoubleMultiplier(number);
+            evaluator.setMultiplier(number);
         }
         else {
             matrix2 = InputMatrix.inputMatrixData();
@@ -96,8 +95,9 @@ public class MatrixCalcRunner {
         }
 
         try {
-            Matrix result = matrixCalc.makeOperation(mathOperation, evaluator, matrix1, matrix2);
-            ConsolePrinter.printLine("The result of " + mathOperation.toString() + " is:");
+
+            Matrix result = matrixCalc.makeOperation(evaluator, matrix1, matrix2);
+            ConsolePrinter.printLine("The result is:");
             ConsolePrinter.printLineList(OutputMatrix.matrixToStringList(result));
         }
         catch (Exception e) {
