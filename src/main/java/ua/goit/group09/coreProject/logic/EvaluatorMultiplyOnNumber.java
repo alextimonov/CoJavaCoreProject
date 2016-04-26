@@ -7,6 +7,16 @@ import ua.goit.group09.coreProject.data.Matrix;
  */
 public class EvaluatorMultiplyOnNumber implements Evaluator {
 
+    private double multiplier;
+
+    public double getMultiplier() {
+        return multiplier;
+    }
+
+    public void setMultiplier(double multiplier) {
+        this.multiplier = multiplier;
+    }
+
     /**
      * finds the multiplication of double number and matrix
      * @param mathOperation       type of math operation with double number to multiply

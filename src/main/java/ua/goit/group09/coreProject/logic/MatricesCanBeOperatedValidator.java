@@ -21,12 +21,13 @@ public class MatricesCanBeOperatedValidator implements MatrixCalc {
      * checks number of lines and columns of given matrices to determine that they can be operated,
      * than invokes the same method of super class to make math operation
      * @param mathOperation     type of math operation (sum, subtract, multiply)
+     * @param evaluator
      * @param matrix1           first matrix to be operated
      * @param matrix2           second matrix to be operated (if it's needed to given type of math operation)
      * @return                  result of given operation
      */
     @Override
-    public Matrix makeOperation(MathOperation mathOperation, Matrix matrix1, Matrix matrix2) {
+    public Matrix makeOperation(MathOperation mathOperation, Evaluator evaluator, Matrix matrix1, Matrix matrix2) {
         switch (mathOperation) {
             case SUM_MATRICES:
             case SUBTRACT_MATRICES: {
@@ -44,7 +45,7 @@ public class MatricesCanBeOperatedValidator implements MatrixCalc {
             }
             break;
         }
-        return this.origin.makeOperation(mathOperation, matrix1, matrix2);
+        return this.origin.makeOperation(mathOperation, evaluator, matrix1, matrix2);
     }
 
    // checks if given matrix can be added or subtracted

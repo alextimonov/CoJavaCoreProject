@@ -18,6 +18,7 @@ public class MatrixNumberMultiplyTest {
                     (new MatricesCanBeOperatedValidator
                             (new MatrixCalcDefault())));
     MathOperation multiplyNumber = MathOperation.MULTIPLY_NUMBER_AND_MATRIX;
+    Evaluator evaluator = new EvaluatorMultiplyOnNumber();
 
     @Test
     public void testMultiplyNormal_1() {
@@ -27,7 +28,7 @@ public class MatrixNumberMultiplyTest {
         multiplyNumber.setDoubleMultiplier(1.0);
 
         Matrix expected = matrix;
-        Matrix actual = matrixCalc.makeOperation(multiplyNumber, matrix, null);
+        Matrix actual = matrixCalc.makeOperation(multiplyNumber, evaluator, matrix, null);
         assertEquals(expected, actual);
     }
 
@@ -41,7 +42,7 @@ public class MatrixNumberMultiplyTest {
         double[][] arr = {{4, 8}, {12, 16}};
         Matrix expected =  new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(multiplyNumber, matrix, null);
+        Matrix actual = matrixCalc.makeOperation(multiplyNumber, evaluator, matrix, null);
         assertEquals(expected, actual);
     }
 
@@ -55,7 +56,7 @@ public class MatrixNumberMultiplyTest {
         double[][] arr = {{9.1875, 11.8125}, {18.375, 21.0}, {29.4, 33.6}};
         Matrix expected =  new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(multiplyNumber, matrix, null);
+        Matrix actual = matrixCalc.makeOperation(multiplyNumber, evaluator, matrix, null);
         assertEquals(expected, actual);
     }
 
@@ -69,7 +70,7 @@ public class MatrixNumberMultiplyTest {
         double[][] arr = {{7.0}, {7.0}, {7.0}};
         Matrix expected =  new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(multiplyNumber, matrix, null);
+        Matrix actual = matrixCalc.makeOperation(multiplyNumber, evaluator, matrix, null);
         assertEquals(expected, actual);
     }
 
@@ -83,7 +84,7 @@ public class MatrixNumberMultiplyTest {
         double[][] arr = {{0, 0}, {0, 0}, {0, 0}};
         Matrix expected =  new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(multiplyNumber, matrix, null);
+        Matrix actual = matrixCalc.makeOperation(multiplyNumber, evaluator, matrix, null);
         assertEquals(expected, actual);
     }
 
@@ -97,7 +98,7 @@ public class MatrixNumberMultiplyTest {
         double[][] arr = {{0.0}};
         Matrix expected =  new Matrix(arr);
 
-        Matrix actual = matrixCalc.makeOperation(multiplyNumber, matrix, null);
+        Matrix actual = matrixCalc.makeOperation(multiplyNumber, evaluator, matrix, null);
         assertEquals(expected, actual);
     }
 
@@ -113,7 +114,7 @@ public class MatrixNumberMultiplyTest {
         Matrix matrix2 = new Matrix(arr2);
 
         expectedException.expect(MatrixHasDifferentNColumnsException.class);
-        matrixCalc.makeOperation(multiplyNumber, matrix1, matrix2);
+        matrixCalc.makeOperation(multiplyNumber, evaluator, matrix1, matrix2);
     }
 
     @Test
@@ -122,6 +123,6 @@ public class MatrixNumberMultiplyTest {
         multiplyNumber.setDoubleMultiplier(5.0);
 
         expectedException.expect(MatrixNullPointerException.class);
-        matrixCalc.makeOperation(multiplyNumber, matrix, null);
+        matrixCalc.makeOperation(multiplyNumber, evaluator, matrix, null);
     }
 }
